@@ -3,7 +3,7 @@ import "./alternativa.css";
 export const Alternativa = () => {
   return (
     <div className="alternativa-frame">
-      <div className="alternativa"></div>
+      <div className="alternativa">A</div>
       <div className="alternativa-contenido">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium ea,
         officia tempora ut dolores odit magnam nostrum sed laudantium? Aperiam
