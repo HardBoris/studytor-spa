@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css";
+import "./styles/global.css";
+import "./styles/layout.css";
 import { AppRouter } from "./routes";
 
 function App() {
