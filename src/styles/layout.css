@@ -13,7 +13,7 @@ header {
 }
 
 main {
-  width: 100%;
+  width: 90%;
   height: 84dvh;
   border: none;
   color: var(--primary-darker);

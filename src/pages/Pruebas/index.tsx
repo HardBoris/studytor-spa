@@ -1,3 +1,5 @@
+import { Pregunta } from "../../components/Pregunta";
+
 export const Pruebas = () => {
   return (
     <>
@@ -5,7 +7,7 @@ export const Pruebas = () => {
         <h1>Avaliação de conhecimento</h1>
       </header>
       <main>
-        <h1>Principal</h1>
+        <Pregunta />
       </main>
       <footer>
         <h1>Pie</h1>
