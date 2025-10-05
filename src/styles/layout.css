@@ -9,7 +9,7 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* font-size: 1.4rem; */
+  font-size: 0.5rem;
 }
 
 main {
@@ -22,6 +22,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  font-size: 0.6rem;
 }
 
 footer {
@@ -35,5 +36,76 @@ footer {
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* font-size: 0.8rem; */
+  font-size: 0.5rem;
+}
+
+@media (min-width: 321px) {
+  header {
+    font-size: 0.5rem;
+  }
+
+  main {
+    font-size: 0.6rem;
+  }
+
+  footer {
+    font-size: 0.5rem;
+  }
+}
+
+@media (min-width: 376px) {
+  /*meu celular*/
+  header {
+    font-size: 0.6rem;
+  }
+
+  main {
+    font-size: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.6rem;
+  }
+}
+
+@media (min-width: 426px) {
+  header {
+    font-size: 0.7rem;
+  }
+
+  main {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 769px) {
+  header {
+    font-size: 0.8rem;
+  }
+
+  main {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  header {
+    font-size: 0.8rem;
+  }
+
+  main {
+    font-size: 1rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
 }
