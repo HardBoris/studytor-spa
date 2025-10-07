@@ -9,7 +9,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
 }
 
 .alternativa {
@@ -24,7 +23,6 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  border: 2px solid green;
 }
 
 .alternativa-contenido {
@@ -32,7 +30,6 @@
   min-height: 50px;
   height: fit-content;
   padding: 5px;
-  border: 2px solid blue;
 }
 
 @media (min-width: 321px) {

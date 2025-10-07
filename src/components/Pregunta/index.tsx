@@ -13,7 +13,6 @@ export const Pregunta = () => {
       <div className="alternativas">
         <Alternativa />
       </div>
-      <div className="pregunta-accion">acciones</div>
     </div>
   );
 };
