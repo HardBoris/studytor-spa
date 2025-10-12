@@ -1,0 +1,27 @@
+form {
+  height: auto;
+  width: 100%;
+  margin: auto;
+  padding-bottom: 20px;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 20px;
+  background-color: var(--primary-light);
+}
+
+.vertical-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.horizontal-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
