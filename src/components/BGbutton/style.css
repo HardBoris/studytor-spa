@@ -15,7 +15,7 @@ button {
   /*border: solid 1px var(--primary);*/
   border-radius: 0.5rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.6rem;
   color: var(--primary-light);
   cursor: pointer;
 }
@@ -38,12 +38,15 @@ button:hover {
   background-color: yellow;
 }
 
-/* @media (min-width: 426px) {
+@media (min-width: 426px) {
   .btn {
     width: 100%;
-    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
   }
-} */
+
+  button {
+    font-size: 1rem;
+  }
+}
