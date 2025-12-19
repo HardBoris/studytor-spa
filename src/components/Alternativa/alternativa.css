@@ -25,6 +25,12 @@
   font-size: 1.2rem;
 }
 
+.alternativa:hover {
+  background-color: var(--primary);
+  /* color: var(--primary-light); */
+  border: none;
+}
+
 .alternativa-contenido {
   width: 80%;
   min-height: 50px;
