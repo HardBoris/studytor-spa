@@ -5,7 +5,7 @@ import "./cuestionario.css";
 
 export const Cuestionario = () => {
   return (
-    <>
+    <div className="cuestionario">
       <BGformulario clase="vertical-form">
         <h1>Cuestionario</h1>
         <div className="clasificacion">
@@ -19,16 +19,29 @@ export const Cuestionario = () => {
             <BGInput name="categoria" placeholder="categoria" />
           </div>
         </div>
-        <BGInput name="pregunta" placeholder="pregunta" />
-        <BGInput name="correcta" placeholder="correcta" />
-        <BGInput name="incorrecta1" placeholder="incorrecta1" />
-        <BGInput name="incorrecta2" placeholder="incorrecta2" />
-        <BGInput name="incorrecta3" placeholder="incorrecta3" />
-        <BGInput name="incorrecta4" placeholder="incorrecta4" />
-        <div className="action-form">
-          <BGbutton>Enviar</BGbutton>
+        <div className="separator">
+          <BGInput name="pregunta" placeholder="pregunta" />
+        </div>
+        <div className="separator">
+          <BGInput name="correcta" placeholder="correcta" />
+        </div>
+        <div className="separator">
+          <BGInput name="incorrecta1" placeholder="incorrecta1" />
+        </div>
+        <div className="separator">
+          <BGInput name="incorrecta2" placeholder="incorrecta2" />
+        </div>
+        <div className="separator">
+          <BGInput name="incorrecta3" placeholder="incorrecta3" />
+        </div>
+        <div className="separator">
+          <BGInput name="incorrecta4" placeholder="incorrecta4" />
+        </div>
+
+        <div className="separator">
+          <BGbutton>Guardar</BGbutton>
         </div>
       </BGformulario>
-    </>
+    </div>
   );
 };

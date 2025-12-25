@@ -1,34 +1,48 @@
+.cuestionario {
+  width: 100%;
+  height: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary-light);
+}
+
 .clasificacion {
-  width: 93%;
-  height: 120px;
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   align-items: center;
+  /*border: 2px solid black;*/
 }
 
 .start-separator {
-  width: 30%;
-  height: 100%;
-  display: flex;
+  width: 100%;
+  height: 80px;
+  /*display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center;*/
+  padding: 0.8rem;
+  /*border: 1px solid blue;*/
 }
 
 .separator {
-  width: 30%;
-  height: 100%;
-  display: flex;
+  width: 100%;
+  height: 80px;
+  /*display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;*/
+  padding: 0.8rem;
+  /*border: 1px solid blue;*/
 }
 
 .end-separator {
-  width: 30%;
-  height: 100%;
-  display: flex;
+  width: 100%;
+  height: 80px;
+  /*display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: center;*/
+  padding: 0.8rem;
+  /*border: 1px solid blue;*/
 }
 
 .action-form {

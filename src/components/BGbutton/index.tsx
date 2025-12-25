@@ -6,9 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const BGbutton = ({ children, variant, ...rest }: ButtonProps) => (
-  <div className="btn">
-    <button {...rest} className={variant}>
-      {children}
-    </button>
-  </div>
+  <button {...rest} className={variant}>
+    {children}
+  </button>
 );

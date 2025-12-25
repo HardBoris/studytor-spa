@@ -1,11 +1,12 @@
 form {
   height: auto;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  padding-bottom: 20px;
+  /*padding: 20px;*/
   /* border: 1px solid black; */
-  border-radius: 20px;
+  /*border-radius: 20px;*/
   background-color: var(--primary-light);
+  font-size: 1rem;
 }
 
 .vertical-form {
