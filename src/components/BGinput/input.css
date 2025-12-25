@@ -4,8 +4,8 @@
   /*border: 1px solid red;*/
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-label {
@@ -20,8 +20,8 @@
 }
 
 .input-field {
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -37,10 +37,11 @@ input {
   width: 100%;
   padding-left: 0.8rem;
   border-radius: 0.5rem;
-  /*border: 1px solid green;*/
+  border: none;
   /*background-color: var(--secondary-lighter-25);
   color: var(--primary-dark);*/
   font-size: 1rem;
+  outline: none;
 }
 
 .error {
