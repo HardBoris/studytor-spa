@@ -1,5 +1,5 @@
 header {
-  width: 90%;
+  width: 100%;
   height: 8dvh;
   border: none;
   background: var(--primary-85);
@@ -13,7 +13,7 @@ header {
 }
 
 main {
-  width: 90%;
+  width: 100%;
   height: 84dvh;
   border: none;
   color: var(--primary-darker);
@@ -84,14 +84,17 @@ footer {
 
 @media (min-width: 769px) {
   header {
+    /*height: 8vh;*/
     font-size: 0.8rem;
   }
 
   main {
+    /*height: 84vh;*/
     font-size: 1rem;
   }
 
   footer {
+    /*height: 8vh;*/
     font-size: 0.8rem;
   }
 }
