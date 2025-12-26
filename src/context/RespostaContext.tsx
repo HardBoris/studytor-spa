@@ -16,6 +16,10 @@ export interface Resposta {
   resposta: string;
 }
 
+export interface Respostas {
+  respostas: Resposta[];
+}
+
 interface RespostaContextData {
   respostas: Resposta[];
   RespostasList: () => void;

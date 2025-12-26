@@ -5,7 +5,6 @@ interface FormularioProps {
   children: ReactNode;
   onSubmit?: () => void;
   clase?: string;
-  orientacion?: string;
 }
 
 export const BGformulario = ({ children, clase, ...rest }: FormularioProps) => (

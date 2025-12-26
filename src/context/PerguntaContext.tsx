@@ -16,6 +16,16 @@ export interface Pergunta {
   pergunta: string;
 }
 
+export interface PerguntaNova {
+  disciplina: string;
+  nivel: string;
+  asunto: string;
+  categoria: string;
+  pergunta: string;
+  correcta: string;
+  //incorrectas: string[];
+}
+
 interface PerguntaContextData {
   perguntas: Pergunta[];
   PerguntasList: () => void;
