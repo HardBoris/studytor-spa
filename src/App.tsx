@@ -6,7 +6,11 @@ import { AppRouter } from "./routes";
 function App() {
   return (
     <>
-      <AppRouter />
+      <header></header>
+      <main>
+        <AppRouter />
+      </main>
+      <footer></footer>
     </>
   );
 }
