@@ -17,7 +17,7 @@ export interface Pergunta {
 }
 
 export interface PerguntaNovaInfo {
-  //disciplina: string;
+  disciplina: string;
   nivel: string;
   asunto: string;
   categoria: string;

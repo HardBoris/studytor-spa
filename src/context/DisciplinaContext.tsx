@@ -30,8 +30,8 @@ export const DisciplinaContext = createContext<DisciplinaContextData>(
 const useDisciplina = () => useContext(DisciplinaContext);
 
 const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
-  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
-  const [disciplinesList, setDisciplinesList] = useState<string[]>([]);
+  const [disciplinas, setDisciplinas] = useState([]);
+  const [disciplinesList, setDisciplinesList] = useState([]);
 
   const DisciplinasLoader = async () => {
     await api
@@ -43,6 +43,13 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
         console.log(error);
       });
   };
+
+  /* const objectToArray = () => {
+    let nuevaLista;
+    nuevaLista = disciplinas.map((item) => item.disciplina);
+    nuevaLista = Object.values(nuevaLista);
+    setDisciplinesList(nuevaLista);
+  }; */
 
   useEffect(() => {
     DisciplinasLoader();
@@ -68,13 +75,6 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
   const disciplinesArray = setDisciplinesList(
     objectToArray(disciplinas, disciplinesList)
   );*/
-
-  const objectToArray = () => {
-    let nuevaLista;
-    nuevaLista = disciplinas.map((item) => item.disciplina);
-    nuevaLista = Object.values(nuevaLista);
-    setDisciplinesList(nuevaLista);
-  };
 
   return (
     <DisciplinaContext.Provider

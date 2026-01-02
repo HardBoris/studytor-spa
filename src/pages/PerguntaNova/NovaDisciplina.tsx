@@ -10,7 +10,11 @@ const NovaDisciplinaSchema = yup.object().shape({
   disciplina: yup.string().required(),
 });
 
-export const NovaDisciplina = () => {
+interface NovaDisciplinaProps {
+  fechar: () => void;
+}
+
+export const NovaDisciplina = ({ fechar }: NovaDisciplinaProps) => {
   const { NewDiscipline } = useDisciplina();
 
   const {
@@ -23,12 +27,14 @@ export const NovaDisciplina = () => {
   });
 
   const discipline_sender = (info: Disciplina) => {
+    console.log(info);
     try {
       NewDiscipline(info);
     } catch (error) {
       console.error("Error al intentar guardar nueva disciplina");
     }
     reset();
+    fechar();
   };
 
   return (
