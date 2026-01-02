@@ -18,7 +18,9 @@ export interface Disciplina {
 
 interface DisciplinaContextData {
   disciplinas: Disciplina[];
-  DisciplinasList: () => void;
+  DisciplinasLoader: () => void;
+  NewDiscipline: (data: Disciplina) => void;
+  disciplinesList: string[];
 }
 
 export const DisciplinaContext = createContext<DisciplinaContextData>(
@@ -29,10 +31,11 @@ const useDisciplina = () => useContext(DisciplinaContext);
 
 const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
+  const [disciplinesList, setDisciplinesList] = useState<string[]>([]);
 
-  const DisciplinasList = async () => {
+  const DisciplinasLoader = async () => {
     await api
-      .get("/studytor-api/disciplinas")
+      .get("/disciplinas")
       .then((response) => {
         setDisciplinas(response.data);
       })
@@ -42,14 +45,44 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
   };
 
   useEffect(() => {
-    DisciplinasList();
+    DisciplinasLoader();
   }, []);
+
+  const NewDiscipline = (data: Disciplina) => {
+    api
+      .post("/disciplinas/register", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  /*function objectToArray(object: Array<Disciplina>, array: Array<string>) {
+    for (let i = 0; i < object.length; i++) {
+      const element = object[i].disciplina;
+      array.push(element);
+    }
+    return array;
+  }
+
+  const disciplinesArray = setDisciplinesList(
+    objectToArray(disciplinas, disciplinesList)
+  );*/
+
+  const objectToArray = () => {
+    let nuevaLista;
+    nuevaLista = disciplinas.map((item) => item.disciplina);
+    nuevaLista = Object.values(nuevaLista);
+    setDisciplinesList(nuevaLista);
+  };
 
   return (
     <DisciplinaContext.Provider
       value={{
         disciplinas,
-        DisciplinasList,
+        DisciplinasLoader,
+        NewDiscipline,
+        disciplinesList,
       }}
     >
       {children}

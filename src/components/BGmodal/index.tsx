@@ -8,7 +8,7 @@ interface ModalType {
   setIsOpen: () => void;
 }
 
-const Modal = ({ children, isOpen, setIsOpen }: ModalType) => {
+const BGModal = ({ children, isOpen, setIsOpen }: ModalType) => {
   return (
     <ReactModal
       shouldCloseOnOverlayClick={true}
@@ -23,4 +23,4 @@ const Modal = ({ children, isOpen, setIsOpen }: ModalType) => {
   );
 };
 
-export default Modal;
+export default BGModal;

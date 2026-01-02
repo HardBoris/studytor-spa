@@ -8,6 +8,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLInputElement> {
   enlace?: string;
   ruta?: string;
   options?: any[];
+  accion?: () => void;
 }
 
 export const BGSelect = ({
@@ -17,6 +18,7 @@ export const BGSelect = ({
   enlace,
   ruta,
   options,
+  accion,
   ...rest
 }: SelectProps) => {
   return (
@@ -27,12 +29,14 @@ export const BGSelect = ({
         {...rest}
         className="select-field"
       >
+        <option>Selecione un item</option>
         {options &&
           options.map((value) => (
             <option key={value} value={value}>
               {value}
             </option>
           ))}
+        {accion && <option onClick={accion}>Novo item</option>}
       </select>
     </div>
   );

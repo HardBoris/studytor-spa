@@ -17,17 +17,18 @@ export interface Pergunta {
 }
 
 export interface PerguntaNovaInfo {
-  disciplina: string;
+  //disciplina: string;
   nivel: string;
   asunto: string;
   categoria: string;
   pergunta: string;
-  correcta: string;
+  //correcta: string;
 }
 
 interface PerguntaContextData {
   perguntas: Pergunta[];
-  PerguntasList: () => void;
+  PerguntasLoader: () => void;
+  NewQuestion: (info: PerguntaNovaInfo) => void;
 }
 
 export const PerguntaContext = createContext<PerguntaContextData>(
@@ -39,9 +40,9 @@ const usePergunta = () => useContext(PerguntaContext);
 const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
 
-  const PerguntasList = async () => {
+  const PerguntasLoader = async () => {
     await api
-      .get("/studytor-api/perguntas")
+      .get("/perguntas")
       .then((response) => {
         setPerguntas(response.data);
       })
@@ -51,14 +52,24 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   };
 
   useEffect(() => {
-    PerguntasList();
+    PerguntasLoader();
   }, []);
+
+  const NewQuestion = (data: PerguntaNovaInfo) => {
+    api
+      .post("/perguntas/register", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <PerguntaContext.Provider
       value={{
         perguntas,
-        PerguntasList,
+        PerguntasLoader,
+        NewQuestion,
       }}
     >
       {children}

@@ -45,6 +45,11 @@
   padding: 0.8rem;
 }
 
+.form_wrapper {
+  width: 100%;
+  height: 200px;
+}
+
 @media (min-width: 426px) {
   .cuestionario {
     width: 400px;
