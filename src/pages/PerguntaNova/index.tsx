@@ -12,6 +12,8 @@ import BGModal from "../../components/BGmodal";
 import { NovaDisciplina } from "./NovaDisciplina";
 import { useDisciplina } from "../../context/DisciplinaContext";
 import { BGSelectObject } from "../../components/BGSelectObject";
+import { useAssunto } from "../../context/AssuntoContext";
+import { NovoAssunto } from "./NovoAssunto";
 
 const PerguntaNovaSchema = yup.object().shape({
   disciplina: yup.string().required(),
@@ -25,12 +27,19 @@ const PerguntaNovaSchema = yup.object().shape({
 export const PerguntaNova = () => {
   const { NewQuestion, PerguntasLoader, perguntas } = usePergunta();
   const { disciplinas, DisciplinasLoader } = useDisciplina();
+  const { assuntos, AssuntosLoader } = useAssunto();
   const nivel = ["Fundamental", "Médio", "Técnico", "Superior"];
+
   const [newDisciplineOpen, setNewDisciplineOpen] = useState(false);
+  const [newTopicOpen, setNewTopicOpen] = useState(false);
 
   useEffect(() => {
     DisciplinasLoader();
   }, [newDisciplineOpen]);
+
+  useEffect(() => {
+    AssuntosLoader();
+  }, [newTopicOpen]);
 
   const {
     formState: { errors },
@@ -54,6 +63,10 @@ export const PerguntaNova = () => {
     setNewDisciplineOpen(!newDisciplineOpen);
   };
 
+  const topicModal = () => {
+    setNewTopicOpen(!newTopicOpen);
+  };
+
   return (
     <>
       <div className="pergunta_form">
@@ -62,7 +75,7 @@ export const PerguntaNova = () => {
           <div className="clasificacion">
             <div className="start-separator">
               <BGSelectObject name="disciplina" register={register}>
-                <option value={""}>Selecione un item</option>
+                <option value={""}>Selecione uma disciplina</option>
                 {disciplinas &&
                   disciplinas.map((item) => (
                     <option key={item.disciplinaId} value={item.disciplinaId}>
@@ -74,14 +87,16 @@ export const PerguntaNova = () => {
             <div className="separator">
               <BGSelect name="nivel" options={nivel} register={register} />
             </div>
-
             <div className="separator">
-              <BGInput
-                name="asunto"
-                placeholder="asunto"
-                register={register}
-                error={errors.asunto?.message}
-              />
+              <BGSelectObject name="assunto" register={register}>
+                <option value={""}>Selecione um assunto</option>
+                {assuntos &&
+                  assuntos.map((item) => (
+                    <option key={item.assuntoId} value={item.assuntoId}>
+                      {item.assunto}
+                    </option>
+                  ))}
+              </BGSelectObject>
             </div>
             <div className="end-separator">
               <BGInput
@@ -119,7 +134,7 @@ export const PerguntaNova = () => {
             </BGbutton>
           </div>
           <div className="separator">
-            <BGbutton>Novo Assunto</BGbutton>
+            <BGbutton onClick={() => topicModal()}>Novo Assunto</BGbutton>
           </div>
           <div className="end-separator">
             <BGbutton>Nova Categoria</BGbutton>
@@ -128,6 +143,9 @@ export const PerguntaNova = () => {
       </div>
       <BGModal isOpen={newDisciplineOpen} setIsOpen={disciplineModal}>
         <NovaDisciplina fechar={disciplineModal} />
+      </BGModal>
+      <BGModal isOpen={newTopicOpen} setIsOpen={topicModal}>
+        <NovoAssunto fechar={topicModal} />
       </BGModal>
     </>
   );

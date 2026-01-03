@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { PerguntaProvider } from "./context/PerguntaContext";
 import { DisciplinaProvider } from "./context/DisciplinaContext";
+import { AssuntoProvider } from "./context/AssuntoContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,9 +14,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <PerguntaProvider>
-        <DisciplinaProvider>
-          <App />
-        </DisciplinaProvider>
+        <AssuntoProvider>
+          <DisciplinaProvider>
+            <App />
+          </DisciplinaProvider>
+        </AssuntoProvider>
       </PerguntaProvider>
     </BrowserRouter>
   </React.StrictMode>
