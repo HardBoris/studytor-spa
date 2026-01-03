@@ -20,7 +20,6 @@ interface DisciplinaContextData {
   disciplinas: Disciplina[];
   DisciplinasLoader: () => void;
   NewDiscipline: (data: Disciplina) => void;
-  disciplinesList: string[];
 }
 
 export const DisciplinaContext = createContext<DisciplinaContextData>(
@@ -31,7 +30,6 @@ const useDisciplina = () => useContext(DisciplinaContext);
 
 const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
   const [disciplinas, setDisciplinas] = useState([]);
-  const [disciplinesList, setDisciplinesList] = useState([]);
 
   const DisciplinasLoader = async () => {
     await api
@@ -43,13 +41,6 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
         console.log(error);
       });
   };
-
-  /* const objectToArray = () => {
-    let nuevaLista;
-    nuevaLista = disciplinas.map((item) => item.disciplina);
-    nuevaLista = Object.values(nuevaLista);
-    setDisciplinesList(nuevaLista);
-  }; */
 
   useEffect(() => {
     DisciplinasLoader();
@@ -64,25 +55,12 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
       .catch((error) => console.log(error));
   };
 
-  /*function objectToArray(object: Array<Disciplina>, array: Array<string>) {
-    for (let i = 0; i < object.length; i++) {
-      const element = object[i].disciplina;
-      array.push(element);
-    }
-    return array;
-  }
-
-  const disciplinesArray = setDisciplinesList(
-    objectToArray(disciplinas, disciplinesList)
-  );*/
-
   return (
     <DisciplinaContext.Provider
       value={{
         disciplinas,
         DisciplinasLoader,
         NewDiscipline,
-        disciplinesList,
       }}
     >
       {children}

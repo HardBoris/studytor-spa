@@ -24,7 +24,7 @@ const PerguntaNovaSchema = yup.object().shape({
 
 export const PerguntaNova = () => {
   const { NewQuestion, PerguntasLoader, perguntas } = usePergunta();
-  const { disciplinas, DisciplinasLoader, disciplinesList } = useDisciplina();
+  const { disciplinas, DisciplinasLoader } = useDisciplina();
   const nivel = ["Fundamental", "Médio", "Técnico", "Superior"];
   const [newDisciplineOpen, setNewDisciplineOpen] = useState(false);
 
@@ -58,14 +58,10 @@ export const PerguntaNova = () => {
     <>
       <div className="pergunta_form">
         <BGformulario onSubmit={handleSubmit(sender)} clase="vertical-form">
-          <h1 onClick={() => disciplineModal()}>Pergunta Nova</h1>
+          <h1>Pergunta Nova</h1>
           <div className="clasificacion">
             <div className="start-separator">
-              <BGSelectObject
-                name="disciplina"
-                options={disciplinesList}
-                register={register}
-              >
+              <BGSelectObject name="disciplina" register={register}>
                 <option value={""}>Selecione un item</option>
                 {disciplinas &&
                   disciplinas.map((item) => (

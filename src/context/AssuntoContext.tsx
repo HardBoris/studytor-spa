@@ -18,7 +18,8 @@ export interface Assunto {
 
 interface AssuntoContextData {
   assuntos: Assunto[];
-  AssuntosList: () => void;
+  AssuntosLoader: () => void;
+  NewTopic: (data: Assunto) => void;
 }
 
 export const AssuntoContext = createContext<AssuntoContextData>(
@@ -28,11 +29,11 @@ export const AssuntoContext = createContext<AssuntoContextData>(
 const useAssunto = () => useContext(AssuntoContext);
 
 const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
-  const [assuntos, setAssuntos] = useState<Assunto[]>([]);
+  const [assuntos, setAssuntos] = useState([]);
 
-  const AssuntosList = async () => {
+  const AssuntosLoader = async () => {
     await api
-      .get("/studytor-api/assuntos")
+      .get("/assuntos")
       .then((response) => {
         setAssuntos(response.data);
       })
@@ -42,14 +43,24 @@ const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
   };
 
   useEffect(() => {
-    AssuntosList();
+    AssuntosLoader();
   }, []);
+
+  const NewTopic = (data: Assunto) => {
+    api
+      .post("/assuntos/register", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <AssuntoContext.Provider
       value={{
         assuntos,
-        AssuntosList,
+        AssuntosLoader,
+        NewTopic,
       }}
     >
       {children}
