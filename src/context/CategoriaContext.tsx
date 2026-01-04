@@ -18,7 +18,8 @@ export interface Categoria {
 
 interface CategoriaContextData {
   categorias: Categoria[];
-  CategoriasList: () => void;
+  CategoriasLoader: () => void;
+  NewCategory: (data: Categoria) => void;
 }
 
 export const CategoriaContext = createContext<CategoriaContextData>(
@@ -28,11 +29,11 @@ export const CategoriaContext = createContext<CategoriaContextData>(
 const useCategoria = () => useContext(CategoriaContext);
 
 const CategoriaProvider = ({ children }: CategoriaProviderProps) => {
-  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [categorias, setCategorias] = useState([]);
 
-  const CategoriasList = async () => {
+  const CategoriasLoader = async () => {
     await api
-      .get("/studytor-api/categorias")
+      .get("/categorias")
       .then((response) => {
         setCategorias(response.data);
       })
@@ -42,14 +43,24 @@ const CategoriaProvider = ({ children }: CategoriaProviderProps) => {
   };
 
   useEffect(() => {
-    CategoriasList();
+    CategoriasLoader();
   }, []);
+
+  const NewCategory = (data: Categoria) => {
+    api
+      .post("/categorias/register", data)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <CategoriaContext.Provider
       value={{
         categorias,
-        CategoriasList,
+        CategoriasLoader,
+        NewCategory,
       }}
     >
       {children}

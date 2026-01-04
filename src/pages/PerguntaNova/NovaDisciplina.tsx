@@ -49,6 +49,7 @@ export const NovaDisciplina = ({ fechar }: NovaDisciplinaProps) => {
             <BGInput
               name="disciplina"
               register={register}
+              placeholder="disciplina"
               error={errors.disciplina?.message}
             />
           </div>

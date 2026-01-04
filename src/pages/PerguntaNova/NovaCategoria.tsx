@@ -4,34 +4,34 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { BGformulario } from "../../components/BGformulario";
 import { BGbutton } from "../../components/BGbutton";
-import { Assunto, useAssunto } from "../../context/AssuntoContext";
+import { Categoria, useCategoria } from "../../context/CategoriaContext";
 
-const NovoAssuntoSchema = yup.object().shape({
-  assunto: yup.string().required(),
+const NovaCategoriaSchema = yup.object().shape({
+  categoria: yup.string().required(),
 });
 
-interface NovoAssuntoProps {
+interface NovaCategoriaProps {
   fechar: () => void;
 }
 
-export const NovoAssunto = ({ fechar }: NovoAssuntoProps) => {
-  const { NewTopic } = useAssunto();
+export const NovaCategoria = ({ fechar }: NovaCategoriaProps) => {
+  const { NewCategory } = useCategoria();
 
   const {
     formState: { errors },
     register,
     reset,
     handleSubmit,
-  } = useForm<Assunto>({
-    resolver: yupResolver(NovoAssuntoSchema),
+  } = useForm<Categoria>({
+    resolver: yupResolver(NovaCategoriaSchema),
   });
 
-  const topic_sender = (info: Assunto) => {
+  const category_sender = (info: Categoria) => {
     console.log(info);
     try {
-      NewTopic(info);
+      NewCategory(info);
     } catch (error) {
-      console.error("Error al intentar guardar nuevo assunto");
+      console.error("Error al intentar guardar nueva categoria");
     }
     reset();
     fechar();
@@ -41,16 +41,16 @@ export const NovoAssunto = ({ fechar }: NovoAssuntoProps) => {
     <>
       <div className="form_wrapper">
         <BGformulario
-          onSubmit={handleSubmit(topic_sender)}
+          onSubmit={handleSubmit(category_sender)}
           clase="vertical-form"
         >
-          <h1>Novo Assunto</h1>
+          <h1>Nova Categoria</h1>
           <div className="separator">
             <BGInput
-              name="assunto"
+              name="categoria"
               register={register}
-              placeholder="assunto"
-              error={errors.assunto?.message}
+              placeholder="categoria"
+              error={errors.categoria?.message}
             />
           </div>
           <div className="separator">
