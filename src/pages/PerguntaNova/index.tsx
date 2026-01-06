@@ -23,11 +23,10 @@ const PerguntaNovaSchema = yup.object().shape({
   asunto: yup.string().required(),
   categoria: yup.string().required(),
   pergunta: yup.string().required(),
-  //correcta: yup.string().required(),
 });
 
 export const PerguntaNova = () => {
-  const { NewQuestion, PerguntasLoader, perguntas } = usePergunta();
+  const { NewQuestion } = usePergunta();
   const { disciplinas, DisciplinasLoader } = useDisciplina();
   const { assuntos, AssuntosLoader } = useAssunto();
   const { categorias, CategoriasLoader } = useCategoria();
@@ -130,14 +129,6 @@ export const PerguntaNova = () => {
               error={errors.pergunta?.message}
             />
           </div>
-          {/*<div className="separator">
-            <BGInput
-              name="correcta"
-              placeholder="correcta"
-              register={register}
-              error={errors.correcta?.message}
-            />
-          </div>*/}
           <div className="separator">
             <BGbutton type="submit">Guardar</BGbutton>
           </div>
