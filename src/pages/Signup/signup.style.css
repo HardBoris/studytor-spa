@@ -1,0 +1,30 @@
+.signup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.signup-fitment {
+  display: none;
+  width: 60%;
+  height: 100%;
+  background-color: var(--secondary-light);
+}
+
+.signup-still {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 430px) {
+  .signup-fitment {
+    display: block;
+  }
+
+  .signup-still {
+    width: 40%;
+  }
+}
