@@ -2,11 +2,14 @@ import React from "react";
 import "./styles/global.css";
 import "./styles/layout.css";
 import { AppRouter } from "./routes";
+import { BGNavigator } from "./components/BGnavigator";
 
 function App() {
   return (
     <>
-      <header></header>
+      <header>
+        <BGNavigator />
+      </header>
       <main>
         <AppRouter />
       </main>
