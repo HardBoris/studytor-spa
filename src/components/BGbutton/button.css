@@ -27,13 +27,13 @@ button:hover {
 }
 
 .yes:hover {
-  background-color: green;
+  background-color: var(--exito);
 }
 
 .not:hover {
-  background-color: red;
+  background-color: var(--error);
 }
 
 .warning:hover {
-  background-color: yellow;
+  background-color: var(--advertencia);
 }
