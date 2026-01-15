@@ -11,18 +11,18 @@
 button {
   height: 100%;
   width: 100%;
-  background-color: var(--primary-85);
+  background-color: var(--primary-70);
   /*border: solid 1px var(--primary);*/
   border-radius: 0.5rem;
   font-weight: bold;
   font-size: 1.3rem;
-  color: var(--primary-light);
+  color: var(--primary-20);
   cursor: pointer;
 }
 
 button:hover {
   background-color: var(--primary);
-  /* color: var(--primary-light); */
+  /* color: var(--primary-20); */
   border: none;
 }
 

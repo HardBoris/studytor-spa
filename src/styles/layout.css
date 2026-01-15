@@ -2,7 +2,7 @@ header {
   width: 100%;
   height: 8dvh;
   border: none;
-  background: var(--primary-85);
+  background: var(--primary-70);
   color: var(--blanco);
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@ main {
   width: 100%;
   height: 84dvh;
   border: none;
-  color: var(--primary-darker);
+  color: var(--primary-90);
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ footer {
   width: 100%;
   height: 8dvh;
   border: none;
-  background: var(--primary-85);
+  background: var(--primary-70);
   color: var(--blanco);
   display: flex;
   flex-direction: column;

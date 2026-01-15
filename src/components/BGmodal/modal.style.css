@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 2;
   top: 0px;
-  background: var(--primary-shadow);
+  background: var(--secondary-shadow-30);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -12,10 +12,10 @@
 
 .modal-box {
   display: block;
-  background: var(--primary-light);
+  background: var(--primary-20);
   padding: 1rem;
   border-radius: 1rem;
-  color: black;
+  color: var(--negro);
 }
 
 /* @media (min-width: 426px) {

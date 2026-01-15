@@ -22,31 +22,53 @@ ul {
 }
 
 :root {
-  --primary-lighter: hsl(215, 100%, 100%);
-  --primary-light: hsl(215, 100%, 95%);
-  --primary-15: hsl(215, 100%, 85%);
-  --primary-25: hsl(215, 100%, 75%);
+  --primary-10: hsl(215, 100%, 90%);
+  --primary-20: hsl(215, 100%, 80%);
+  --primary-30: hsl(215, 100%, 70%);
+  --primary-40: hsl(215, 100%, 60%);
   --primary: hsl(215, 100%, 50%);
-  --primary-75: hsl(215, 100%, 25%);
-  --primary-85: hsl(215, 100%, 15%);
-  --primary-dark: hsl(215, 100%, 5%);
-  --primary-darker: hsl(215, 100%, 0%);
-  --primary-shadow-dark: hsl(215, 100%, 5%, 0.5);
-  --primary-shadow-85: hsl(215, 100%, 15%, 0.5);
-  --primary-shadow-75: hsl(215, 100%, 25%, 0.5);
-  --primary-shadow: hsl(215, 100%, 50%, 0.5);
-  --primary-shadow-25: hsl(215, 100%, 75%, 0.5);
-  --primary-shadow-15: hsl(215, 100%, 85%, 0.5);
-  --primary-shadow-light: hsl(215, 100%, 95%, 0.5);
+  --primary-60: hsl(215, 100%, 40%);
+  --primary-70: hsl(215, 100%, 30%);
+  --primary-80: hsl(215, 100%, 20%);
+  --primary-90: hsl(215, 100%, 10%);
+  --primary-shadow-90: hsl(215, 100%, 10%, 0.3);
+  --primary-shadow-80: hsl(215, 100%, 20%, 0.3);
+  --primary-shadow-70: hsl(215, 100%, 30%, 0.3);
+  --primary-shadow-60: hsl(215, 100%, 40%, 0.3);
+  --primary-shadow: hsl(215, 100%, 50%, 0.3);
+  --primary-shadow-40: hsl(215, 100%, 60%, 0.3);
+  --primary-shadow-30: hsl(215, 100%, 70%, 0.3);
+  --primary-shadow-20: hsl(215, 100%, 80%, 0.3);
+  --primary-shadow-10: hsl(215, 100%, 90%, 0.3);
   --blanco: hsl(0, 0%, 100%);
-  --gris-light: hsl(0, 0%, 95%);
-  --gris-15: hsl(0, 0%, 85%);
-  --gris-25: hsl(0, 0%, 75%);
+  --gris-10: hsl(0, 0%, 90%);
+  --gris-20: hsl(0, 0%, 80%);
+  --gris-30: hsl(0, 0%, 70%);
+  --gris-40: hsl(0, 0%, 60%);
   --gris: hsl(0, 0%, 50%);
-  --gris-75: hsl(0, 0%, 25%);
-  --gris-85: hsl(0, 0%, 15%);
-  --gris-dark: hsl(0, 0%, 5%);
+  --gris-60: hsl(0, 0%, 40%);
+  --gris-70: hsl(0, 0%, 30%);
+  --gris-80: hsl(0, 0%, 20%);
+  --gris-90: hsl(0, 0%, 10%);
   --negro: hsl(0, 0%, 0%);
+  --secondary-10: hsl(185, 100%, 90%);
+  --secondary-20: hsl(185, 100%, 80%);
+  --secondary-30: hsl(185, 100%, 70%);
+  --secondary-40: hsl(185, 100%, 60%);
+  --secondary: hsl(185, 100%, 50%);
+  --secondary-60: hsl(185, 100%, 40%);
+  --secondary-70: hsl(185, 100%, 30%);
+  --secondary-80: hsl(185, 100%, 20%);
+  --secondary-90: hsl(185, 100%, 10%);
+  --secondary-shadow-90: hsl(185, 100%, 10%, 0.3);
+  --secondary-shadow-80: hsl(185, 100%, 20%, 0.3);
+  --secondary-shadow-70: hsl(185, 100%, 30%, 0.3);
+  --secondary-shadow-60: hsl(185, 100%, 40%, 0.3);
+  --secondary-shadow: hsl(185, 100%, 50%, 0.3);
+  --secondary-shadow-40: hsl(185, 100%, 60%, 0.3);
+  --secondary-shadow-30: hsl(185, 100%, 70%, 0.3);
+  --secondary-shadow-20: hsl(185, 100%, 80%, 0.3);
+  --secondary-shadow-10: hsl(185, 100%, 90%, 0.3);
 }
 
 body {
@@ -57,8 +79,8 @@ body {
   width: 100dvw;
   height: 100dvh;
   border: none;
-  background: var(--gris-15);
-  color: var(--primary-darker);
+  background: var(--gris-10);
+  color: var(--primary-90);
   display: flex;
   flex-direction: column;
   justify-content: center;
