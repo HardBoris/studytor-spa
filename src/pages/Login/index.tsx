@@ -7,7 +7,7 @@ export const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Aventura | Login</title>
+        <title>Studytor | Login</title>
       </Helmet>
       <div className="login">
         <div className="login-fitment"></div>

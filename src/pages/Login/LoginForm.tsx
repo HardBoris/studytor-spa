@@ -36,30 +36,40 @@ export const LoginForm = () => {
   };
 
   return (
-    <BGformulario clase="" onSubmit={handleSubmit(sender)}>
-      <h1>LogIn</h1>
-      <BGInput
-        register={register}
-        name="companyCode"
-        error={errors.companyCode?.message}
-        placeholder="Código"
-        //isPassword={false}
-      />
-      <BGInput
-        register={register}
-        name="name"
-        error={errors.name?.message}
-        placeholder="Usuário"
-        //isPassword={false}
-      />
-      <BGInput
-        register={register}
-        name="password"
-        error={errors.password?.message}
-        placeholder="Senha"
-        //isPassword={true}
-      />
-      <BGbutton type="submit">Entrar</BGbutton>
-    </BGformulario>
+    <div className="login-form">
+      <BGformulario clase="vertical-form" onSubmit={handleSubmit(sender)}>
+        <h1>LogIn</h1>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="companyCode"
+            error={errors.companyCode?.message}
+            placeholder="Código"
+            //isPassword={false}
+          />
+        </div>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="name"
+            error={errors.name?.message}
+            placeholder="Usuário"
+            //isPassword={false}
+          />
+        </div>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="password"
+            error={errors.password?.message}
+            placeholder="Senha"
+            //isPassword={true}
+          />
+        </div>
+        <div className="separator">
+          <BGbutton type="submit">Entrar</BGbutton>
+        </div>
+      </BGformulario>
+    </div>
   );
 };
