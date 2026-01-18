@@ -34,13 +34,14 @@ export const BGNavigator = () => {
       <div className="navigator">
         <Link to="/signup">
           <span>SignUp</span>
-          {/* <FaArrowAltCircleDown/> */}
+          {/* <FaArrowAltCircleDown /> */}
         </Link>
       </div>
       {/* {company && (
         <> */}
       <div className="navigator">
-        <Link to="/" onClick={() => {}}>
+        {/*<Link to="/" onClick={() => {}}>*/}
+        <Link to="/perguntanova">
           <span>Dashboard</span>
           {/* <AiFillDashboard/> */}
         </Link>
