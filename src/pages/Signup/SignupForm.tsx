@@ -36,33 +36,45 @@ export const SignupForm = () => {
   };
 
   return (
-    <BGformulario clase="" onSubmit={handleSubmit(sender)}>
-      <h1>SignUp</h1>
-      <BGInput
-        register={register}
-        name="companyCode"
-        error={errors.companyCode?.message}
-        placeholder="Código"
-      />
-      <BGInput
-        register={register}
-        name="name"
-        error={errors.name?.message}
-        placeholder="Usuário"
-      />
-      <BGInput
-        register={register}
-        name="password"
-        error={errors.password?.message}
-        placeholder="Senha"
-      />
-      <BGInput
-        register={register}
-        name="confirmPassword"
-        error={errors.confirmPassword?.message}
-        placeholder="Confirmar Senha"
-      />
-      <BGbutton type="submit">Registrar</BGbutton>
-    </BGformulario>
+    <div className="signup-form">
+      <BGformulario clase="vertical-form" onSubmit={handleSubmit(sender)}>
+        <h1>SignUp</h1>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="companyCode"
+            error={errors.companyCode?.message}
+            placeholder="Código"
+          />
+        </div>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="name"
+            error={errors.name?.message}
+            placeholder="Usuário"
+          />
+        </div>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="password"
+            error={errors.password?.message}
+            placeholder="Senha"
+          />
+        </div>
+        <div className="separator">
+          <BGInput
+            register={register}
+            name="confirmPassword"
+            error={errors.confirmPassword?.message}
+            placeholder="Confirmar Senha"
+          />
+        </div>
+        <div className="separator">
+          <BGbutton type="submit">Registrar</BGbutton>
+        </div>
+      </BGformulario>
+    </div>
   );
 };
