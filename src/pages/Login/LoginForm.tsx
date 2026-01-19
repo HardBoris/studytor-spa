@@ -8,9 +8,10 @@ import { BGformulario } from "../../components/BGformulario";
 import { BGbutton } from "../../components/BGbutton";
 // import { InputPassword } from "../../components/oldInputPassword";
 import { BGInput } from "../../components/BGinput";
+import { useAuth } from "../../context/UserContext";
 
 const signInSchema = yup.object().shape({
-  companyCode: yup.string().required("Campo obrigatório"),
+  institutionCode: yup.string().required("Campo obrigatório"),
   name: yup.string().required("Campo obrigatório"),
   password: yup.string().required("Senha obrigatória"),
 });
@@ -18,11 +19,11 @@ const signInSchema = yup.object().shape({
 interface txtData {
   name: string;
   password: string;
-  companyCode: string;
+  institutionCode: string;
 }
 
 export const LoginForm = () => {
-  //const { signIn } = useAuth();
+  const { signIn } = useAuth();
   // const history = useNavigate();
 
   const {
@@ -33,6 +34,7 @@ export const LoginForm = () => {
 
   const sender = (data: txtData) => {
     console.log(data);
+    signIn(data);
   };
 
   return (
@@ -42,8 +44,8 @@ export const LoginForm = () => {
         <div className="separator">
           <BGInput
             register={register}
-            name="companyCode"
-            error={errors.companyCode?.message}
+            name="institutionCode"
+            error={errors.institutionCode?.message}
             placeholder="Código"
             //isPassword={false}
           />

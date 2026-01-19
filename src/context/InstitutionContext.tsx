@@ -29,7 +29,7 @@ export interface Institution {
   institution: string;
 } */
 
-interface InstitutionInfo {
+export interface InstitutionInfo {
   institutionName: string;
   institutionEmail: string;
 }
@@ -38,7 +38,7 @@ interface InstitutionContextData {
   instituto: Institution;
   institutos: Institution[];
   miInstituto: Institution;
-  institutionRegister: (info: InstitutionInfo) => Promise<void>;
+  NewInstitution: (info: InstitutionInfo) => Promise<void>;
   institutionsList: () => Promise<void>;
   myInstitution: () => Promise<void>;
 }
@@ -58,7 +58,7 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
     {} as Institution
   );
 
-  const institutionRegister = async ({
+  const NewInstitution = async ({
     institutionName,
     institutionEmail,
   }: InstitutionInfo) => {
@@ -116,7 +116,7 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
         instituto,
         institutos,
         miInstituto,
-        institutionRegister,
+        NewInstitution,
         institutionsList,
         myInstitution,
       }}
