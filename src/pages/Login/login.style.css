@@ -37,6 +37,13 @@
   border-radius: 0.8rem;
 }
 
+.ufc {
+  color: var(--primary-70);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
 @media (min-width: 426px) {
   .login-fitment {
     display: block;

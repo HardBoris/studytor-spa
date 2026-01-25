@@ -15,7 +15,7 @@ export const Signup = () => {
   return (
     <>
       <Helmet>
-        <title>Aventura | Signup</title>
+        <title>Studytor | Signup</title>
       </Helmet>
       <div className="signup">
         <div className="signup-still">

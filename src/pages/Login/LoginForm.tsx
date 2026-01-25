@@ -9,6 +9,7 @@ import { BGbutton } from "../../components/BGbutton";
 // import { InputPassword } from "../../components/oldInputPassword";
 import { BGInput } from "../../components/BGinput";
 import { useAuth } from "../../context/UserContext";
+import { Link } from "react-router-dom";
 
 const signInSchema = yup.object().shape({
   institutionCode: yup.string().required("Campo obrigatório"),
@@ -72,6 +73,12 @@ export const LoginForm = () => {
           <BGbutton type="submit">Entrar</BGbutton>
         </div>
       </BGformulario>
+      <div className="separator">
+        Novo por aqui?
+        <Link to={"/signup"} className="ufc">
+          Cadastre-se
+        </Link>
+      </div>
     </div>
   );
 };

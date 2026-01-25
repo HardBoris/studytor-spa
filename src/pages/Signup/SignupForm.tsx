@@ -6,6 +6,7 @@ import { BGformulario } from "../../components/BGformulario";
 //import { useNavigate } from "react-router-dom";
 import { BGInput } from "../../components/BGinput";
 import { BGbutton } from "../../components/BGbutton";
+import { Link } from "react-router-dom";
 
 const signUpSchema = yup.object().shape({
   companyCode: yup.string().required("Campo obrigatório"),
@@ -75,6 +76,12 @@ export const SignupForm = () => {
           <BGbutton type="submit">Registrar</BGbutton>
         </div>
       </BGformulario>
+      <div className="separator">
+        Já es nosso aluno?
+        <Link to={"/login"} className="ufc">
+          Entrar
+        </Link>
+      </div>
     </div>
   );
 };
