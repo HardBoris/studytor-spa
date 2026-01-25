@@ -1,0 +1,68 @@
+.instituto {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/src/assets/pictures/educacional.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.instituto-fitment {
+  display: none;
+  width: 50%;
+  height: 100%;
+  /*flex: 1;*/
+  background-color: var(--secondary-20);
+}
+
+.instituto-still {
+  width: 100%;
+  height: 100%;
+  padding: 0.8rem;
+  /*flex: 1;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instituto-form {
+  width: 100%;
+  height: auto;
+  padding: 0.8rem;
+  background-color: var(--primary-20);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  border-radius: 0.8rem;
+}
+
+.ufc {
+  color: var(--primary-70);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0 10px;
+}
+
+@media (min-width: 426px) {
+  .instituto-fitment {
+    display: block;
+  }
+
+  .instituto-still {
+    width: 60%;
+  }
+
+  /* .instituto-form {
+    width: 100%;
+  } */
+}
+
+@media (min-width: 1025px) {
+  .instituto-still {
+    width: 50%;
+  }
+}

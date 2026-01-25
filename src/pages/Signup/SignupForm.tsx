@@ -77,9 +77,9 @@ export const SignupForm = () => {
         </div>
       </BGformulario>
       <div className="separator">
-        Já es nosso aluno?
-        <Link to={"/login"} className="ufc">
-          Entrar
+        Sem instituto?
+        <Link to={"/novoinstituto"} className="ufc">
+          Criar novo instituto
         </Link>
       </div>
     </div>

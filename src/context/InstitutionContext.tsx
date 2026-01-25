@@ -44,7 +44,7 @@ interface InstitutionContextData {
 }
 
 const InstitutionContext = createContext<InstitutionContextData>(
-  {} as InstitutionContextData
+  {} as InstitutionContextData,
 );
 
 const useInstitution = () => useContext(InstitutionContext);
@@ -55,13 +55,14 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
   const [instituto, setInstituto] = useState<Institution>({} as Institution);
   const [institutos, setInstitutos] = useState<Institution[]>([]);
   const [miInstituto, setMiInstituto] = useState<Institution>(
-    {} as Institution
+    {} as Institution,
   );
 
   const NewInstitution = async ({
     institutionName,
     institutionEmail,
   }: InstitutionInfo) => {
+    let institution: Institution;
     await api
       .post("/institutions/register", {
         institutionName,
@@ -69,14 +70,16 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
       })
       .then((response) => {
         console.log(response.data);
-        const { institution } = response.data;
+        institution = response.data;
         setInstituto(institution);
       })
-      .then(() => navigate(`/${instituto.institutionId}/users/register`))
+      .then(() => navigate(`/${institution.institutionId}/users/register`))
       .catch((error) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {}, []);
 
   const institutionsList = async () => {
     await api

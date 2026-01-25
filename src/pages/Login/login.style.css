@@ -4,6 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("/src/assets/pictures/login_image.png");
+  background-position: center;
+  background-size: cover;
 }
 
 .login-fitment {
@@ -46,10 +49,34 @@
 
 @media (min-width: 426px) {
   .login-fitment {
-    display: block;
+    width: 50%;
+    height: 100%;
+    padding: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid black; */
   }
 
   .login-still {
     width: 50%;
+  }
+
+  picture {
+    width: 90%;
+    height: 90%;
+    /* border: 2px solid red; */
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8rem;
+    /* border: 2px solid blue; */
+    /* display: none; */
+  }
+
+  .login-form {
+    width: 90%;
   }
 }

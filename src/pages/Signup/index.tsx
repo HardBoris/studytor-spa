@@ -4,6 +4,7 @@ import { SignupForm } from "./SignupForm";
 import BGModal from "../../components/BGmodal";
 import { useState } from "react";
 import { NovoInstituto } from "./NovoInstituto";
+import cadastro_picture from "../../assets/pictures/cadastro-image.jpeg";
 
 export const Signup = () => {
   const [newInstitutionOpen, setNewInstitutionOpen] = useState(false);
@@ -21,7 +22,11 @@ export const Signup = () => {
         <div className="signup-still">
           <SignupForm />
         </div>
-        <div className="signup-fitment"></div>
+        <div className="signup-fitment">
+          <picture>
+            <img src={cadastro_picture} alt="" />
+          </picture>
+        </div>
       </div>
       <BGModal isOpen={newInstitutionOpen} setIsOpen={institutionModal}>
         <NovoInstituto fechar={institutionModal} />

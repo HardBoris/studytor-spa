@@ -60,9 +60,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [usersArray, setUsersArray] = useState<User[]>([]);
 
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem("@Aventura:token");
-    const user = localStorage.getItem("@Aventura:user");
-    const institution = localStorage.getItem("@Aventura:institution");
+    const token = localStorage.getItem("@Studytor:token");
+    const user = localStorage.getItem("@Studytor:user");
+    const institution = localStorage.getItem("@Studytor:institution");
 
     if (token && user && institution) {
       return {
@@ -102,7 +102,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         localStorage.setItem("@Studytor:user", JSON.stringify(user));
         localStorage.setItem(
           "@Studytor:institution",
-          JSON.stringify(institution)
+          JSON.stringify(institution),
         );
         console.log(institution);
         setData({ user, token, institution });
@@ -134,7 +134,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
           name,
           password,
         },
-        { headers: { authorization: `Bearer ${data.token}` } }
+        { headers: { authorization: `Bearer ${data.token}` } },
       )
       .then((response) => {
         console.log(response.data);
