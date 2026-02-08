@@ -2,7 +2,7 @@ import {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
+  //useEffect,
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
@@ -84,9 +84,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     usersList();
-  }, []);
+  }, []); */
 
   const signIn = async ({
     name,
@@ -97,6 +97,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     await api
       .post("/login", { name, password, institutionCode })
       .then((response) => {
+        //console.log(response);
         const { user, token, institution } = response.data;
         localStorage.setItem("@Studytor:token", token);
         localStorage.setItem("@Studytor:user", JSON.stringify(user));
@@ -104,7 +105,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
           "@Studytor:institution",
           JSON.stringify(institution),
         );
-        console.log(institution);
+        //console.log(institution);
         setData({ user, token, institution });
         history(`/${institution.institutionId}`);
         /* toast.update(aviso, {
@@ -138,7 +139,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
       )
       .then((response) => {
         console.log(response.data);
-        const { usuario } = response.data;
+        //const { usuario } = response.data;
         /* toast.update(aviso, {
           render: "Novo usuário cadastrado!",
           type: "success",

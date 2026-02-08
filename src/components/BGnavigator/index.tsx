@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
 import "./navigator.style.css";
 //import { useAuth } from "../../context/UserContext";
-import {
-  FaArrowAltCircleDown,
-  // FaArrowAltCircleLeft,
-  // FaArrowAltCircleRight,
-  FaHome,
-  FaShoppingCart,
-  FaSignOutAlt,
-} from "react-icons/fa";
-import { AiFillDashboard } from "react-icons/ai";
+import {} from //FaArrowAltCircleDown,
+// FaArrowAltCircleLeft,
+// FaArrowAltCircleRight,
+//FaHome,
+//FaShoppingCart,
+//FaSignOutAlt,
+"react-icons/fa";
+//import { AiFillDashboard } from "react-icons/ai";
 // import { MdRequestPage, MdViewList } from "react-icons/md";
 // import { GiOpenTreasureChest } from "react-icons/gi";
-import { BiLogIn } from "react-icons/bi";
+//import { BiLogIn } from "react-icons/bi";
+import { useAuth } from "../../context/UserContext";
 
 export const BGNavigator = () => {
-  //const { signOut /* company */ } = useAuth();
+  const { signOut } = useAuth();
 
   return (
     <nav>
@@ -69,12 +69,12 @@ export const BGNavigator = () => {
       </div> */}
       {/* </>
       )} */}
-      {/*<div className="navigator">
+      <div className="navigator">
         <Link to="/" onClick={() => signOut()}>
-          {/* <span>Salir</span>
-          <FaSignOutAlt />
+          <span>Salir</span>
+          {/* <FaSignOutAlt /> */}
         </Link>
-      </div>*/}
+      </div>
     </nav>
   );
 };

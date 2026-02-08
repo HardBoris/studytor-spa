@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 import { localApi as api } from "../services/api";
@@ -50,7 +50,7 @@ const InstitutionContext = createContext<InstitutionContextData>(
 const useInstitution = () => useContext(InstitutionContext);
 
 const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { token } = useAuth();
   const [instituto, setInstituto] = useState<Institution>({} as Institution);
   const [institutos, setInstitutos] = useState<Institution[]>([]);
@@ -73,7 +73,7 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
         institution = response.data;
         setInstituto(institution);
       })
-      .then(() => navigate(`/${institution.institutionId}/users/register`))
+      //.then(() => navigate(`/${institution.institutionId}/users/register`))
       .catch((error) => {
         console.log(error);
       });
