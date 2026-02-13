@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, Navigate } from "react-router-dom";
 //import { Pruebas } from "../pages/Pruebas";
 //import { PerguntaNova } from "../pages/PerguntaNova";
 import { Home } from "../pages/Home";
@@ -12,6 +12,7 @@ export const PublicRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Outlet />
     </>

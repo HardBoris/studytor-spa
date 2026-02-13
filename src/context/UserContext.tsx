@@ -2,7 +2,7 @@ import {
   createContext,
   ReactNode,
   useContext,
-  //useEffect,
+  useEffect,
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
@@ -160,6 +160,10 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     setData({} as AuthState);
   };
+
+  useEffect(() => {
+    usersList();
+  }, []);
 
   return (
     <UserContext.Provider

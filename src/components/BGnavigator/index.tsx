@@ -15,66 +15,57 @@ import {} from //FaArrowAltCircleDown,
 import { useAuth } from "../../context/UserContext";
 
 export const BGNavigator = () => {
-  const { signOut } = useAuth();
+  const { signOut, token } = useAuth();
 
   return (
-    <nav>
-      <div className="navigator">
-        <Link to="/">
-          <span>Home</span>
-          {/* <FaHome /> */}
-        </Link>
-      </div>
-      <div className="navigator">
-        <Link to="/login">
-          <span>LogIn</span>
-          {/*<BiLogIn/>*/}
-        </Link>
-      </div>
-      <div className="navigator">
-        <Link to="/signup">
-          <span>SignUp</span>
-          {/* <FaArrowAltCircleDown /> */}
-        </Link>
-      </div>
-      {/* {company && (
-        <> */}
-      <div className="navigator">
-        {/*<Link to="/" onClick={() => {}}>*/}
-        <Link to="/perguntanova">
-          <span>Dashboard</span>
-          {/* <AiFillDashboard/> */}
-        </Link>
-      </div>
-      <div className="navigator">
-        <Link to={`/test/purchases`} onClick={() => {}}>
-          <span>Compras</span>
-          {/* <FaShoppingCart/> */}
-        </Link>
-      </div>
-      {/* <div className="navigator">
-        <Link to={`/${company.companyId}/entries`} onClick={() => {}}>
-          <GiOpenTreasureChest />
-        </Link>
-      </div> */}
-      {/* <div className="navigator">
-        <Link to={`/${company.companyId}/movements`} onClick={() => {}}>
-          <MdViewList />
-        </Link>
-      </div> */}
-      {/* <div className="navigator">
-        <Link to={`/${company.companyId}/requisitions`} onClick={() => {}}>
-          <MdRequestPage />
-        </Link>
-      </div> */}
-      {/* </>
-      )} */}
-      <div className="navigator">
-        <Link to="/" onClick={() => signOut()}>
-          <span>Salir</span>
-          {/* <FaSignOutAlt /> */}
-        </Link>
-      </div>
-    </nav>
+    <>
+      {token ? (
+        <nav>
+          <div className="navigator">
+            <Link to="/">
+              <span>Home</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to="/login">
+              <span>LogIn</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to="/signup">
+              <span>SignUp</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to="/perguntanova">
+              <span>Dashboard</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to={`/test/purchases`} onClick={() => {}}>
+              <span>Compras</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to="/" onClick={() => signOut()}>
+              <span>Salir</span>
+            </Link>
+          </div>
+        </nav>
+      ) : (
+        <nav>
+          <div className="navigator">
+            <Link to="/">
+              <span>Home</span>
+            </Link>
+          </div>
+          <div className="navigator">
+            <Link to="/login">
+              <span>LogIn</span>
+            </Link>
+          </div>
+        </nav>
+      )}
+    </>
   );
 };

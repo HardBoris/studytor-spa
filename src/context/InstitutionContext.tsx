@@ -79,8 +79,6 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
       });
   };
 
-  useEffect(() => {}, []);
-
   const institutionsList = async () => {
     await api
       .get("/institutions", {
@@ -112,6 +110,10 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    myInstitution();
+  }, []);
 
   return (
     <InstitutionContext.Provider
