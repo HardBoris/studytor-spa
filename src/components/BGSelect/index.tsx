@@ -27,7 +27,7 @@ export const BGSelect = ({
         {...rest}
         className="select-field"
       >
-        <option value={""}>Selecione un item</option>
+        {/* <option value={""}>Selecione un item</option> */}
         {options &&
           options.map((value) => (
             <option key={value} value={value}>

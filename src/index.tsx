@@ -16,8 +16,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <InstitutionProvider>
-        <UserProvider>
+      <UserProvider>
+        <InstitutionProvider>
           <PerguntaProvider>
             <CategoriaProvider>
               <AssuntoProvider>
@@ -27,8 +27,8 @@ root.render(
               </AssuntoProvider>
             </CategoriaProvider>
           </PerguntaProvider>
-        </UserProvider>
-      </InstitutionProvider>
+        </InstitutionProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );

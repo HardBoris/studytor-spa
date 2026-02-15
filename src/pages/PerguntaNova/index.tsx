@@ -16,11 +16,12 @@ import { useAssunto } from "../../context/AssuntoContext";
 import { NovoAssunto } from "./NovoAssunto";
 import { useCategoria } from "../../context/CategoriaContext";
 import { NovaCategoria } from "./NovaCategoria";
+import { useAuth } from "../../context/UserContext";
 
 const PerguntaNovaSchema = yup.object().shape({
   disciplina: yup.string().required(),
   nivel: yup.string().required(),
-  asunto: yup.string().required(),
+  assunto: yup.string().required(),
   categoria: yup.string().required(),
   pergunta: yup.string().required(),
 });
@@ -30,11 +31,17 @@ export const PerguntaNova = () => {
   const { disciplinas, DisciplinasLoader } = useDisciplina();
   const { assuntos, AssuntosLoader } = useAssunto();
   const { categorias, CategoriasLoader } = useCategoria();
+  const { institution } = useAuth();
   const nivel = ["Fundamental", "Médio", "Técnico", "Superior"];
 
   const [newDisciplineOpen, setNewDisciplineOpen] = useState(false);
   const [newTopicOpen, setNewTopicOpen] = useState(false);
   const [newCategoryOpen, setNewCategoryOpen] = useState(false);
+
+  const [selectedDiscipline, setSelectedDiscipline] = useState("");
+  //const [selectedNivel, setSelectedNivel] = useState("");
+  const [selectedAsunto, setSelectedAsunto] = useState("");
+  const [selectedCategoria, setSelectedCategoria] = useState("");
 
   useEffect(() => {
     DisciplinasLoader();
@@ -55,16 +62,22 @@ export const PerguntaNova = () => {
     handleSubmit,
   } = useForm<PerguntaNovaInfo>({ resolver: yupResolver(PerguntaNovaSchema) });
 
+  //console.log(token);
+
   const sender = (info: PerguntaNovaInfo) => {
     console.log(info);
 
     try {
       NewQuestion(info);
     } catch (error) {
-      console.error();
+      console.log(error);
     }
     reset();
   };
+
+  /* const handleDiscipline = () => {
+    setSelectedDiscipline(e.target.value);
+  }; */
 
   const disciplineModal = () => {
     setNewDisciplineOpen(!newDisciplineOpen);
@@ -86,10 +99,14 @@ export const PerguntaNova = () => {
           <div className="clasificacion">
             <div className="start-separator">
               <BGSelectObject name="disciplina" register={register}>
-                <option value={""}>Selecione uma disciplina</option>
+                <option>Selecione uma disciplina</option>
                 {disciplinas &&
                   disciplinas.map((item) => (
-                    <option key={item.disciplinaId} value={item.disciplinaId}>
+                    <option
+                      key={item.disciplinaId}
+                      value={item.disciplinaId}
+                      onChange={() => setSelectedDiscipline}
+                    >
                       {item.disciplina}
                     </option>
                   ))}
@@ -103,7 +120,11 @@ export const PerguntaNova = () => {
                 <option value={""}>Selecione um assunto</option>
                 {assuntos &&
                   assuntos.map((item) => (
-                    <option key={item.assuntoId} value={item.assuntoId}>
+                    <option
+                      key={item.assuntoId}
+                      value={item.assuntoId}
+                      onChange={() => setSelectedAsunto}
+                    >
                       {item.assunto}
                     </option>
                   ))}
@@ -114,7 +135,11 @@ export const PerguntaNova = () => {
                 <option value={""}>Selecione uma categoria</option>
                 {categorias &&
                   categorias.map((item) => (
-                    <option key={item.categoriaId} value={item.categoriaId}>
+                    <option
+                      key={item.categoriaId}
+                      value={item.categoriaId}
+                      onChange={() => setSelectedCategoria}
+                    >
                       {item.categoria}
                     </option>
                   ))}

@@ -15,17 +15,17 @@ import {} from //FaArrowAltCircleDown,
 import { useAuth } from "../../context/UserContext";
 
 export const BGNavigator = () => {
-  const { signOut, token } = useAuth();
+  const { signOut, token, institution } = useAuth();
 
   return (
     <>
       {token ? (
         <nav>
-          <div className="navigator">
+          {/* <div className="navigator">
             <Link to="/">
               <span>Home</span>
             </Link>
-          </div>
+          </div> */}
           <div className="navigator">
             <Link to="/login">
               <span>LogIn</span>
@@ -37,15 +37,15 @@ export const BGNavigator = () => {
             </Link>
           </div>
           <div className="navigator">
-            <Link to="/perguntanova">
+            <Link to={"/" + institution.institutionId}>
               <span>Dashboard</span>
             </Link>
           </div>
-          <div className="navigator">
+          {/* <div className="navigator">
             <Link to={`/test/purchases`} onClick={() => {}}>
               <span>Compras</span>
             </Link>
-          </div>
+          </div> */}
           <div className="navigator">
             <Link to="/" onClick={() => signOut()}>
               <span>Salir</span>
@@ -54,11 +54,11 @@ export const BGNavigator = () => {
         </nav>
       ) : (
         <nav>
-          <div className="navigator">
+          {/* <div className="navigator">
             <Link to="/">
               <span>Home</span>
             </Link>
-          </div>
+          </div> */}
           <div className="navigator">
             <Link to="/login">
               <span>LogIn</span>

@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import { localApi as api } from "../services/api";
+import { useAuth } from "./UserContext";
+import { useParams } from "react-router-dom";
 
 interface PerguntaProviderProps {
   children: ReactNode;
@@ -19,7 +21,7 @@ export interface Pergunta {
 export interface PerguntaNovaInfo {
   disciplina: string;
   nivel: string;
-  asunto: string;
+  assunto: string;
   categoria: string;
   pergunta: string;
   //correcta: string;
@@ -32,17 +34,18 @@ interface PerguntaContextData {
 }
 
 export const PerguntaContext = createContext<PerguntaContextData>(
-  {} as PerguntaContextData
+  {} as PerguntaContextData,
 );
 
 const usePergunta = () => useContext(PerguntaContext);
 
 const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
+  const { institution } = useAuth();
 
   const PerguntasLoader = async () => {
     await api
-      .get("/perguntas")
+      .get("/:institutionId/perguntas")
       .then((response) => {
         setPerguntas(response.data);
       })
@@ -57,7 +60,10 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
 
   const NewQuestion = (data: PerguntaNovaInfo) => {
     api
-      .post("/perguntas/register", data)
+      .post("/:institutionId/perguntas/register", {
+        ...data,
+        institution: institution.institutionId,
+      })
       .then((response) => {
         console.log(response.data);
       })

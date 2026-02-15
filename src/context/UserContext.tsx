@@ -75,6 +75,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
     return {} as AuthState;
   });
 
+  console.log(data.token);
+
   const usersList = async () => {
     await api
       .get(`/${data.institution.institutionId}/users`, {
@@ -83,10 +85,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
       .then((response) => setUsersArray(response.data))
       .catch((error) => console.log(error));
   };
-
-  /* useEffect(() => {
-    usersList();
-  }, []); */
 
   const signIn = async ({
     name,
@@ -160,10 +158,6 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     setData({} as AuthState);
   };
-
-  useEffect(() => {
-    usersList();
-  }, []);
 
   return (
     <UserContext.Provider
