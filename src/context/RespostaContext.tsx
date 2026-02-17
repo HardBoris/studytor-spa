@@ -14,10 +14,12 @@ interface RespostaProviderProps {
 export interface Resposta {
   respostaId?: string;
   resposta: string;
+  estaCerto?: boolean;
+  perguntaId?: string;
 }
 
 export interface Respostas {
-  respostas: Resposta[];
+  respostas: Resposta[] | undefined;
 }
 
 interface RespostaContextData {
@@ -26,7 +28,7 @@ interface RespostaContextData {
 }
 
 export const RespostaContext = createContext<RespostaContextData>(
-  {} as RespostaContextData
+  {} as RespostaContextData,
 );
 
 const useResposta = () => useContext(RespostaContext);

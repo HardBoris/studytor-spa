@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { localApi as api } from "../services/api";
+import { useAuth } from "./UserContext";
 
 interface AssuntoProviderProps {
   children: ReactNode;
@@ -23,17 +24,18 @@ interface AssuntoContextData {
 }
 
 export const AssuntoContext = createContext<AssuntoContextData>(
-  {} as AssuntoContextData
+  {} as AssuntoContextData,
 );
 
 const useAssunto = () => useContext(AssuntoContext);
 
 const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
+  const { token } = useAuth();
   const [assuntos, setAssuntos] = useState([]);
 
   const AssuntosLoader = async () => {
     await api
-      .get("/assuntos")
+      .get("/assuntos", { headers: { authorization: `Bearer ${token}` } })
       .then((response) => {
         setAssuntos(response.data);
       })
@@ -48,7 +50,9 @@ const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
 
   const NewTopic = (data: Assunto) => {
     api
-      .post("/assuntos/register", data)
+      .post("/assuntos/register", data, {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response.data);
       })

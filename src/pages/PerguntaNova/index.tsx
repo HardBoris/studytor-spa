@@ -17,6 +17,7 @@ import { NovoAssunto } from "./NovoAssunto";
 import { useCategoria } from "../../context/CategoriaContext";
 import { NovaCategoria } from "./NovaCategoria";
 import { useAuth } from "../../context/UserContext";
+import { Respostas } from "../Respostas";
 
 const PerguntaNovaSchema = yup.object().shape({
   disciplina: yup.string().required(),
@@ -37,6 +38,7 @@ export const PerguntaNova = () => {
   const [newDisciplineOpen, setNewDisciplineOpen] = useState(false);
   const [newTopicOpen, setNewTopicOpen] = useState(false);
   const [newCategoryOpen, setNewCategoryOpen] = useState(false);
+  const [answersOpen, setAnswersOpen] = useState(false);
 
   const [selectedDiscipline, setSelectedDiscipline] = useState("");
   //const [selectedNivel, setSelectedNivel] = useState("");
@@ -66,13 +68,15 @@ export const PerguntaNova = () => {
 
   const sender = (info: PerguntaNovaInfo) => {
     console.log(info);
+    answersModal();
 
-    try {
+    /* try {
       NewQuestion(info);
+      answersModal();
     } catch (error) {
       console.log(error);
     }
-    reset();
+    reset(); */
   };
 
   /* const handleDiscipline = () => {
@@ -89,6 +93,10 @@ export const PerguntaNova = () => {
 
   const categoryModal = () => {
     setNewCategoryOpen(!newCategoryOpen);
+  };
+
+  const answersModal = () => {
+    setAnswersOpen(!answersOpen);
   };
 
   return (
@@ -167,6 +175,9 @@ export const PerguntaNova = () => {
           <div className="separator">
             <BGbutton onClick={() => topicModal()}>Novo Assunto</BGbutton>
           </div>
+          <div className="separator">
+            <BGbutton onClick={() => answersModal()}>modal</BGbutton>
+          </div>
           <div className="end-separator">
             <BGbutton onClick={() => categoryModal()}>Nova Categoria</BGbutton>
           </div>
@@ -180,6 +191,9 @@ export const PerguntaNova = () => {
       </BGModal>
       <BGModal isOpen={newCategoryOpen} setIsOpen={categoryModal}>
         <NovaCategoria fechar={categoryModal} />
+      </BGModal>
+      <BGModal isOpen={answersOpen} setIsOpen={answersModal}>
+        <Respostas fechar={answersModal} />
       </BGModal>
     </>
   );

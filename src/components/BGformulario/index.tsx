@@ -5,10 +5,16 @@ interface FormularioProps {
   children: ReactNode;
   onSubmit?: () => void;
   clase?: string;
+  id?: string;
 }
 
-export const BGformulario = ({ children, clase, ...rest }: FormularioProps) => (
-  <form {...rest} className={clase}>
+export const BGformulario = ({
+  children,
+  clase,
+  id,
+  ...rest
+}: FormularioProps) => (
+  <form {...rest} className={clase} id={id}>
     {children}
   </form>
 );

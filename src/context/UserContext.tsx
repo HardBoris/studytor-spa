@@ -75,7 +75,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
     return {} as AuthState;
   });
 
-  console.log(data.token);
+  //console.log(data.token);
 
   const usersList = async () => {
     await api

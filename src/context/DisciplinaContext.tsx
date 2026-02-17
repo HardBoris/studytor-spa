@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { localApi as api } from "../services/api";
+import { useAuth } from "./UserContext";
 
 interface DisciplinaProviderProps {
   children: ReactNode;
@@ -23,17 +24,20 @@ interface DisciplinaContextData {
 }
 
 export const DisciplinaContext = createContext<DisciplinaContextData>(
-  {} as DisciplinaContextData
+  {} as DisciplinaContextData,
 );
 
 const useDisciplina = () => useContext(DisciplinaContext);
 
 const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
+  const { token } = useAuth();
   const [disciplinas, setDisciplinas] = useState([]);
 
   const DisciplinasLoader = async () => {
     await api
-      .get("/disciplinas")
+      .get("/disciplinas", {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         setDisciplinas(response.data);
       })
@@ -48,7 +52,9 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
 
   const NewDiscipline = (data: Disciplina) => {
     api
-      .post("/disciplinas/register", data)
+      .post("/disciplinas/register", data, {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         console.log(response.data);
       })

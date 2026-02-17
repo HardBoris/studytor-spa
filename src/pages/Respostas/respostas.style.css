@@ -1,0 +1,55 @@
+.respuesta-form {
+  width: 100%;
+  height: auto;
+  padding: 0.8rem;
+  background-color: var(--primary-20);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.respuesta-row {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.separator {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+.separator-checkbox {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+@media (min-width: 426px) {
+  .respuesta-form {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .respuesta-form {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    border-radius: 0.8rem;
+    align-items: flex-start;
+  }
+}

@@ -41,11 +41,13 @@ const usePergunta = () => useContext(PerguntaContext);
 
 const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
-  const { institution } = useAuth();
+  const { institution, token } = useAuth();
 
   const PerguntasLoader = async () => {
     await api
-      .get("/:institutionId/perguntas")
+      .get("/:institutionId/perguntas", {
+        headers: { authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         setPerguntas(response.data);
       })
@@ -60,10 +62,14 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
 
   const NewQuestion = (data: PerguntaNovaInfo) => {
     api
-      .post("/:institutionId/perguntas/register", {
-        ...data,
-        institution: institution.institutionId,
-      })
+      .post(
+        "/:institutionId/perguntas/register",
+        {
+          ...data,
+          institution: institution.institutionId,
+        },
+        { headers: { authorization: `Bearer ${token}` } },
+      )
       .then((response) => {
         console.log(response.data);
       })

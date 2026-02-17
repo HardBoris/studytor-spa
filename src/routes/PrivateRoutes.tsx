@@ -7,6 +7,7 @@ import { Login } from "../pages/Login";
 import { useAuth } from "../context/UserContext";
 import { Dashboard } from "../pages/Dashboard";
 import { PerguntaNova } from "../pages/PerguntaNova";
+import { Respostas } from "../pages/Respostas";
 
 export const PrivateRoutes = () => {
   const { institution } = useAuth();
@@ -18,6 +19,7 @@ export const PrivateRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/novoinstituto" element={<Institution />} />
+        {/* <Route path="/respostas" element={<Respostas />} /> */}
         <Route
           path={"/" + institution.institutionId + "/perguntanova"}
           element={<PerguntaNova />}

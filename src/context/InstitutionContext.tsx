@@ -103,7 +103,7 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
         },
       })
       .then((response) => {
-        console.log(token);
+        //console.log(token);
         const { institution } = response.data;
         setMiInstituto(institution);
       })

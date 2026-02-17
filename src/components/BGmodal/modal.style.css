@@ -4,7 +4,7 @@
   position: absolute;
   z-index: 2;
   top: 0px;
-  background: var(--secondary-shadow-30);
+  background: var(--secondary-shadow-70);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -18,16 +18,16 @@
   color: var(--negro);
 }
 
-/* @media (min-width: 426px) {
+@media (min-width: 426px) {
   .modal-overlay {
     align-items: center;
   }
 
   .modal-box {
-    max-width: 96%;
-    max-height: 500px;
+    width: 80%;
+    height: auto;
   }
-} */
+}
 
 @media (min-width: 769px) {
   .modal-overlay {
