@@ -67,16 +67,17 @@ export const PerguntaNova = () => {
   //console.log(token);
 
   const sender = (info: PerguntaNovaInfo) => {
-    console.log(info);
-    answersModal();
+    //console.log(info);
+    //answersModal();
 
-    /* try {
+    try {
       NewQuestion(info);
       answersModal();
     } catch (error) {
       console.log(error);
     }
-    reset(); */
+    answersModal();
+    reset();
   };
 
   /* const handleDiscipline = () => {
@@ -174,9 +175,6 @@ export const PerguntaNova = () => {
           </div>
           <div className="separator">
             <BGbutton onClick={() => topicModal()}>Novo Assunto</BGbutton>
-          </div>
-          <div className="separator">
-            <BGbutton onClick={() => answersModal()}>modal</BGbutton>
           </div>
           <div className="end-separator">
             <BGbutton onClick={() => categoryModal()}>Nova Categoria</BGbutton>

@@ -9,6 +9,7 @@ import { AssuntoProvider } from "./context/AssuntoContext";
 import { CategoriaProvider } from "./context/CategoriaContext";
 import { UserProvider } from "./context/UserContext";
 import { InstitutionProvider } from "./context/InstitutionContext";
+import { RespostaProvider } from "./context/RespostaContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -19,13 +20,15 @@ root.render(
       <UserProvider>
         <InstitutionProvider>
           <PerguntaProvider>
-            <CategoriaProvider>
-              <AssuntoProvider>
-                <DisciplinaProvider>
-                  <App />
-                </DisciplinaProvider>
-              </AssuntoProvider>
-            </CategoriaProvider>
+            <RespostaProvider>
+              <CategoriaProvider>
+                <AssuntoProvider>
+                  <DisciplinaProvider>
+                    <App />
+                  </DisciplinaProvider>
+                </AssuntoProvider>
+              </CategoriaProvider>
+            </RespostaProvider>
           </PerguntaProvider>
         </InstitutionProvider>
       </UserProvider>

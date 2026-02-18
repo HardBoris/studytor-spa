@@ -3,7 +3,7 @@ import { BGbutton } from "../../components/BGbutton";
 import { BGformulario } from "../../components/BGformulario";
 import { BGInput } from "../../components/BGinput";
 import * as yup from "yup";
-import { Resposta } from "../../context/RespostaContext";
+import { Resposta, useResposta } from "../../context/RespostaContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "./respostas.style.css";
 //import { useState } from "react";
@@ -18,6 +18,8 @@ interface AnswersProps {
 }
 
 export const Respostas = ({ fechar }: AnswersProps) => {
+  const { NewAnswer } = useResposta();
+
   const {
     formState: { errors },
     register,
@@ -27,6 +29,11 @@ export const Respostas = ({ fechar }: AnswersProps) => {
 
   const responder = (info: Resposta) => {
     console.log(info);
+    try {
+      NewAnswer(info);
+    } catch (error) {
+      console.log(error);
+    }
     reset();
     //fechar();
   };
@@ -35,7 +42,7 @@ export const Respostas = ({ fechar }: AnswersProps) => {
     <>
       <div className="respuesta-form">
         <BGformulario onSubmit={handleSubmit(responder)} clase="vertical-form">
-          <h1>Respuestas</h1>
+          <h1>Resposta</h1>
           <div className="respuesta-row">
             <div className="separator">
               <BGInput

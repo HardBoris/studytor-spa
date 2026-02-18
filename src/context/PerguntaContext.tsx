@@ -31,6 +31,7 @@ interface PerguntaContextData {
   perguntas: Pergunta[];
   PerguntasLoader: () => void;
   NewQuestion: (info: PerguntaNovaInfo) => void;
+  estaPergunta: string;
 }
 
 export const PerguntaContext = createContext<PerguntaContextData>(
@@ -42,6 +43,7 @@ const usePergunta = () => useContext(PerguntaContext);
 const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
   const { institution, token } = useAuth();
+  const [estaPergunta, setEstaPergunta] = useState("");
 
   const PerguntasLoader = async () => {
     await api
@@ -71,7 +73,8 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
         { headers: { authorization: `Bearer ${token}` } },
       )
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.perguntaId);
+        setEstaPergunta(response.data.perguntaId);
       })
       .catch((error) => console.log(error));
   };
@@ -82,6 +85,7 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
         perguntas,
         PerguntasLoader,
         NewQuestion,
+        estaPergunta,
       }}
     >
       {children}
