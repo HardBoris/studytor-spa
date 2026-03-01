@@ -34,7 +34,7 @@ export const LoginForm = () => {
   } = useForm<txtData>({ resolver: yupResolver(signInSchema) });
 
   const sender = (data: txtData) => {
-    console.log(data);
+    //console.log(data);
     signIn(data);
   };
 

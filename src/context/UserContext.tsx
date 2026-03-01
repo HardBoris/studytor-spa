@@ -58,17 +58,24 @@ const useAuth = () => {
 const UserProvider = ({ children }: UserProviderProps) => {
   const history = useNavigate();
   const [usersArray, setUsersArray] = useState<User[]>([]);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState<User>({} as User);
+  const [institution, setInstitution] = useState<Institution>(
+    {} as Institution,
+  );
 
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem("@Studytor:token");
+    /* const token = localStorage.getItem("@Studytor:token");
     const user = localStorage.getItem("@Studytor:user");
-    const institution = localStorage.getItem("@Studytor:institution");
+    const institution = localStorage.getItem("@Studytor:institution"); */
 
     if (token && user && institution) {
       return {
         token,
-        user: JSON.parse(user),
-        institution: JSON.parse(institution),
+        /* user: JSON.parse(user),
+        institution: JSON.parse(institution), */
+        user,
+        institution,
       };
     }
 
@@ -97,14 +104,16 @@ const UserProvider = ({ children }: UserProviderProps) => {
       .then((response) => {
         //console.log(response);
         const { user, token, institution } = response.data;
-        localStorage.setItem("@Studytor:token", token);
+        /* localStorage.setItem("@Studytor:token", token);
         localStorage.setItem("@Studytor:user", JSON.stringify(user));
         localStorage.setItem(
           "@Studytor:institution",
           JSON.stringify(institution),
-        );
-        //console.log(institution);
-        setData({ user, token, institution });
+        ) */ //console.log(institution);
+        //setData({ user, token, institution });
+        setUser(user);
+        setToken(token);
+        setInstitution(institution);
         history(`/${institution.institutionId}`);
         /* toast.update(aviso, {
           render: "Bem-Vindo a Oikos!",
@@ -152,9 +161,12 @@ const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const signOut = () => {
-    localStorage.removeItem("@Studytor:token");
+    /* localStorage.removeItem("@Studytor:token");
     localStorage.removeItem("@Studytor:user");
-    localStorage.removeItem("@Studytor:institution");
+    localStorage.removeItem("@Studytor:institution"); */
+    setInstitution({} as Institution);
+    setUser({} as User);
+    setToken("");
 
     setData({} as AuthState);
   };
@@ -162,9 +174,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
   return (
     <UserContext.Provider
       value={{
-        token: data.token,
-        user: data.user,
-        institution: data.institution,
+        token: token,
+        user: user,
+        institution: institution,
         usersArray,
         signIn,
         signOut,

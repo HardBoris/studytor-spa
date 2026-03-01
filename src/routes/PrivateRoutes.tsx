@@ -8,6 +8,7 @@ import { useAuth } from "../context/UserContext";
 import { Dashboard } from "../pages/Dashboard";
 import { PerguntaNova } from "../pages/PerguntaNova";
 import { Respostas } from "../pages/Respostas";
+import { NewDashboard } from "../pages/Dashboard/dashboard";
 
 export const PrivateRoutes = () => {
   const { institution } = useAuth();
@@ -28,7 +29,10 @@ export const PrivateRoutes = () => {
           path="*"
           element={<Navigate to={"/" + institution.institutionId} replace />}
         />
-        <Route path={"/" + institution.institutionId} element={<Dashboard />} />
+        <Route
+          path={"/" + institution.institutionId}
+          element={<NewDashboard />}
+        />
       </Routes>
       <Outlet />
     </>
