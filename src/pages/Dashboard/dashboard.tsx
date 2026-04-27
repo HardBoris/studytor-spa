@@ -3,6 +3,8 @@ import { useAuth } from "../../context/UserContext";
 import { useEffect, useState } from "react";
 import { BGbutton } from "../../components/BGbutton";
 import { BGInput } from "../../components/BGinput";
+import { useCategoria } from "../../context/CategoriaContext";
+import Papa from "papaparse";
 //import { useMovement } from "../../context/MovementContext";
 //import { useProduct } from "../../context/ProductContext";
 //import { Button } from "../../components/Button";
@@ -38,18 +40,35 @@ interface Pregunta {
 
 export const NewDashboard = () => {
   const { user, signOut } = useAuth();
+  const { categorias, CategoriasLoader } = useCategoria();
   //const { saveProduct } = useProduct();
   //const { saveMovement, movementsList } = useMovement();
   const [file, setFile] = useState("");
+  const [csvFile, setCsvFile] = useState<any[]>([]);
   const [show, setShow] = useState(0);
 
-  /* useEffect(() => {
-    movementsList();
-  }, []); */
+  useEffect(() => {
+    CategoriasLoader();
+  }, []);
 
   const activate = (n: number) => setShow(n);
 
-  const readFile = (e: any) => {
+  const fileHandler = (e: any) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    if (file.type === "text/csv") {
+      console.log("Es un archivo csv");
+    } else if (file.type === "text/plain") {
+      console.log("Es un archivo txt");
+    } else {
+      console.log("Archivo no soportado");
+    }
+  };
+
+  const txtReader = (e: any) => {
     const file = e.target.files[0];
     if (!file) {
       return;
@@ -62,6 +81,20 @@ export const NewDashboard = () => {
     fileReader.onerror = () => {
       console.log(fileReader.error);
     };
+  };
+
+  const csvReader = (e: any) => {
+    const csvFile = e.target.files[0];
+    if (!csvFile) {
+      return;
+    }
+    Papa.parse(csvFile, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        setCsvFile(results.data);
+      },
+    });
   };
 
   const arrayReducer = (parametro: string[][]) => {
@@ -91,6 +124,8 @@ export const NewDashboard = () => {
         item.slice(66),
       ]); */
 
+  file && console.log(file);
+  csvFile && console.log(csvFile);
   const preguntasTxtArray =
     file && file.replace(/["]+/g, "").split("\\n\\n\\n");
   //.map((item) => item.split("\\n").filter((item) => item.length !== 0));
@@ -110,8 +145,11 @@ export const NewDashboard = () => {
   const preguntas =
     preguntasTxt &&
     preguntasTxt.map((item) => ({
-      pregunta: item[0],
-      respostas: item.slice(1).map((cosa) => ({ respuesta: cosa })),
+      pregunta: item[0].replace(/\d+.\s\(\d{4}\)\s/, ""),
+      respostas: item.slice(1).map((cosa) => ({
+        respuesta: cosa.replace(/\([A-Z]\)/g, "").trim(),
+        estaCerta: false,
+      })),
     }));
 
   /* const movementsArray: "" | movementObject[] =
@@ -124,17 +162,17 @@ export const NewDashboard = () => {
       seller: item[4],
     })); */
 
-  const preguntasArray = clasificacion && preguntas;
-  console.log([
-    {
-      categoria: clasificacion[0],
-      nivel: clasificacion[1],
-      disciplinas: {
-        disciplina: clasificacion[2],
-        assuntos: { assunto: clasificacion[3], preguntas: preguntas },
+  const preguntasArray = clasificacion &&
+    preguntas && [
+      {
+        categoria: clasificacion[0],
+        nivel: clasificacion[1],
+        disciplinas: {
+          disciplina: clasificacion[2],
+          assuntos: { assunto: clasificacion[3], preguntas: preguntas },
+        },
       },
-    },
-  ]);
+    ];
   /*const clasificacion =
     preguntasTxtArray && console.log(preguntasTxtArray.slice(0, 1));
       disciplinas: {
@@ -198,10 +236,30 @@ export const NewDashboard = () => {
       Promise.all(productsArray.map((item) => saveProduct(item))); */
   };
 
-  const handleData = () => {
+  /* const handleData = () => {
     usersKeeper();
     setTimeout(productsKeeper, 500);
     setTimeout(movementsKeeper, 1000);
+  }; */
+
+  const handleData = () => {
+    const category = preguntasArray && preguntasArray[0].categoria;
+    const level = preguntasArray && preguntasArray[0].nivel;
+    const discipline =
+      preguntasArray && preguntasArray[0].disciplinas.disciplina;
+    const asunto =
+      preguntasArray && preguntasArray[0].disciplinas.assuntos.assunto;
+    const question =
+      preguntasArray && preguntasArray[0].disciplinas.assuntos.preguntas[0];
+    const answers =
+      preguntasArray &&
+      preguntasArray[0].disciplinas.assuntos.preguntas[0].respostas;
+    console.log(category);
+    console.log(level);
+    console.log(discipline);
+    console.log(asunto);
+    console.log(question);
+    console.log(answers);
   };
 
   return (
@@ -209,7 +267,7 @@ export const NewDashboard = () => {
       <div className="dashboard-sheath">
         <div className="file-form">
           <label htmlFor="file">Escolher Arquivo</label>
-          <BGInput type="file" name="file" id="file" onChange={readFile} />
+          <BGInput type="file" name="file" id="file" onChange={fileHandler} />
         </div>
         <div className="file-form sender">
           <BGbutton onClick={() => handleData()} variant="yes">

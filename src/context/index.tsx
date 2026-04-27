@@ -4,19 +4,25 @@ import { AssuntoProvider } from "./AssuntoContext";
 import { CategoriaProvider } from "./CategoriaContext";
 import { PerguntaProvider } from "./PerguntaContext";
 import { RespostaProvider } from "./RespostaContext";
+import { UserProvider } from "./UserContext";
+import { InstitutionProvider } from "./InstitutionContext";
 
 interface AppProviderProps {
   children: ReactNode;
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => (
-  <RespostaProvider>
-    <PerguntaProvider>
+  <InstitutionProvider>
+    <UserProvider>
       <CategoriaProvider>
-        <AssuntoProvider>
-          <DisciplinaProvider>{children}</DisciplinaProvider>
-        </AssuntoProvider>
+        <DisciplinaProvider>
+          <AssuntoProvider>
+            <PerguntaProvider>
+              <RespostaProvider>{children}</RespostaProvider>
+            </PerguntaProvider>
+          </AssuntoProvider>
+        </DisciplinaProvider>
       </CategoriaProvider>
-    </PerguntaProvider>
-  </RespostaProvider>
+    </UserProvider>
+  </InstitutionProvider>
 );

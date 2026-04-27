@@ -16,18 +16,20 @@ interface RespostaProviderProps {
 export interface Resposta {
   respostaId?: string;
   resposta: string;
-  estaCerto?: boolean;
+  estaCerto: boolean;
   perguntaId?: string;
 }
 
 export interface Respostas {
-  respostas: Resposta[] | undefined;
+  respostas: Resposta[];
 }
 
 interface RespostaContextData {
   respostas: Resposta[];
   RespostasList: () => void;
   NewAnswer: (info: Resposta) => void;
+  setAnswers: (data: Resposta[]) => void;
+  NewAnswersArray: (data: Resposta[]) => void;
 }
 
 export const RespostaContext = createContext<RespostaContextData>(
@@ -38,7 +40,8 @@ const useResposta = () => useContext(RespostaContext);
 
 const RespostaProvider = ({ children }: RespostaProviderProps) => {
   const [respostas, setRespostas] = useState<Resposta[]>([]);
-  const { institution, token } = useAuth();
+  const [answers, setAnswers] = useState<Resposta[]>([]);
+  const { institution, token, user } = useAuth();
   const { estaPergunta } = usePergunta();
 
   const RespostasList = async () => {
@@ -61,6 +64,7 @@ const RespostaProvider = ({ children }: RespostaProviderProps) => {
           ...data,
           institution: institution.institutionId,
           pergunta: estaPergunta,
+          user: user.userId,
         },
         { headers: { authorization: `Bearer ${token}` } },
       )
@@ -68,6 +72,10 @@ const RespostaProvider = ({ children }: RespostaProviderProps) => {
         console.log(response.data);
       })
       .catch((error) => console.log(error));
+  };
+
+  const NewAnswersArray = (data: Resposta[]) => {
+    answers && Promise.all(answers.map((item) => NewAnswer(item)));
   };
 
   useEffect(() => {
@@ -80,6 +88,8 @@ const RespostaProvider = ({ children }: RespostaProviderProps) => {
         respostas,
         RespostasList,
         NewAnswer,
+        setAnswers,
+        NewAnswersArray,
       }}
     >
       {children}
