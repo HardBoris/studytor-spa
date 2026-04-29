@@ -6,7 +6,6 @@ import { PerguntaProvider } from "./PerguntaContext";
 import { RespostaProvider } from "./RespostaContext";
 import { UserProvider } from "./UserContext";
 import { InstitutionProvider } from "./InstitutionContext";
-import { DataProvider } from "./DataContext";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -19,9 +18,7 @@ export const AppProvider = ({ children }: AppProviderProps) => (
         <DisciplinaProvider>
           <AssuntoProvider>
             <PerguntaProvider>
-              <RespostaProvider>
-                <DataProvider>{children}</DataProvider>
-              </RespostaProvider>
+              <RespostaProvider>{children}</RespostaProvider>
             </PerguntaProvider>
           </AssuntoProvider>
         </DisciplinaProvider>

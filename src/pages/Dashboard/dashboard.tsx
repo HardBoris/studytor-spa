@@ -5,6 +5,7 @@ import { BGbutton } from "../../components/BGbutton";
 import { BGInput } from "../../components/BGinput";
 import { useCategoria } from "../../context/CategoriaContext";
 import Papa from "papaparse";
+import { useData } from "../../context/DataContext";
 //import { useMovement } from "../../context/MovementContext";
 //import { useProduct } from "../../context/ProductContext";
 //import { Button } from "../../components/Button";
@@ -41,17 +42,13 @@ interface Pregunta {
 export const NewDashboard = () => {
   const { user, signOut } = useAuth();
   const { categorias, CategoriasLoader } = useCategoria();
-  //const { saveProduct } = useProduct();
-  //const { saveMovement, movementsList } = useMovement();
-  const [file, setFile] = useState("");
+  const [txtFile, setTxtFile] = useState<any[]>([]);
   const [csvFile, setCsvFile] = useState<any[]>([]);
-  const [show, setShow] = useState(0);
+  const [bigFile, setBigFile] = useState<any[]>([]);
 
   useEffect(() => {
     CategoriasLoader();
   }, []);
-
-  const activate = (n: number) => setShow(n);
 
   const fileHandler = (e: any) => {
     const file = e.target.files[0];
@@ -60,13 +57,63 @@ export const NewDashboard = () => {
     }
 
     if (file.type === "text/csv") {
-      console.log("Es un archivo csv");
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          setBigFile(results.data);
+        },
+      });
     } else if (file.type === "text/plain") {
-      console.log("Es un archivo txt");
+      let cosa: string = "";
+      const fileReader = new FileReader();
+      fileReader.readAsText(file);
+      fileReader.onload = () => {
+        cosa = JSON.stringify(fileReader.result);
+        const preguntasTxtArray =
+          cosa && cosa.replace(/["]+/g, "").split("\\n\\n\\n");
+
+        const clasificacion =
+          preguntasTxtArray && preguntasTxtArray.slice(0, 1)[0].split("\\n");
+
+        const preguntasTxt =
+          preguntasTxtArray &&
+          preguntasTxtArray.slice(1).map((item) => item.split("\\n"));
+
+        const preguntas =
+          preguntasTxt &&
+          preguntasTxt.map((item) => ({
+            Pergunta: item[0].replace(/\d+.\s\(\d{4}\)\s/, ""),
+            Alternativa1: item[1].replace(/\([A-Z]\)/g, "").trim(),
+            Alternativa2: item[3].replace(/\([A-Z]\)/g, "").trim(),
+            Alternativa3: item[5].replace(/\([A-Z]\)/g, "").trim(),
+            Alternativa4: item[7].replace(/\([A-Z]\)/g, "").trim(),
+            Alternativa5: item[9] && item[9].replace(/\([A-Z]\)/g, "").trim(),
+            Verdad1: item[2],
+            Verdad2: item[4],
+            Verdad3: item[6],
+            Verdad4: item[8],
+            Verdad5: item[10] && item[10],
+            Categoria: clasificacion && clasificacion[0],
+            Nivel: clasificacion && clasificacion[1],
+            Disciplina: clasificacion && clasificacion[2],
+            Assunto: clasificacion && clasificacion[3],
+          }));
+
+        preguntas && setBigFile(preguntas);
+      };
+
+      fileReader.onerror = () => {
+        console.log(fileReader.error);
+      };
     } else {
       console.log("Archivo no soportado");
     }
   };
+
+  useEffect(() => {
+    console.log(bigFile);
+  }, [bigFile]);
 
   return (
     <div className="dashboard">
@@ -79,39 +126,9 @@ export const NewDashboard = () => {
           <BGbutton variant="yes">ENVIAR ARQUIVO</BGbutton>
         </div>
       </div>
-      {/* <div className={show !== 0 ? "invisible" : ""}>
-        <AllMovements />
-      </div>
-      <div className={show !== 1 ? "invisible" : ""}>
-        <MovementsByProduct />
-      </div>
-      <div className={show !== 2 ? "invisible" : ""}>
-        <MovementsByUser />
-      </div> */}
+
       <div className="footer_action">
-        <div className="tabs">
-          <div
-            role="button"
-            className={show === 0 ? "tab active" : "tab"}
-            onClick={() => activate(0)}
-          >
-            Todos
-          </div>
-          <div
-            role="button"
-            className={show === 1 ? "tab active" : "tab"}
-            onClick={() => activate(1)}
-          >
-            Agrupados por Produto
-          </div>
-          <div
-            role="button"
-            className={show === 2 ? "tab active" : "tab"}
-            onClick={() => activate(2)}
-          >
-            Agrupados por Vendedor
-          </div>
-        </div>
+        <div className="tabs"></div>
         <div className="exit_btn">
           <BGbutton onClick={() => signOut()} variant="warning">
             sair
