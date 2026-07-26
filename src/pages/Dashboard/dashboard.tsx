@@ -5,30 +5,26 @@ import { BGbutton } from "../../components/BGbutton";
 import { BGInput } from "../../components/BGinput";
 import { useCategoria } from "../../context/CategoriaContext";
 import Papa from "papaparse";
-import { useData } from "../../context/DataContext";
-//import { useMovement } from "../../context/MovementContext";
-//import { useProduct } from "../../context/ProductContext";
-//import { Button } from "../../components/Button";
-//import { AllMovements } from "./all";
-//import { MovementsByProduct } from "./MovementsByProduct/byProduct";
-//import { MovementsByUser } from "./MovementsByUser/byUser";
+import { useResposta } from "../../context/RespostaContext";
+import { usePergunta } from "../../context/PerguntaContext";
+import { BGformulario } from "../../components/BGformulario";
 
-interface movementObject {
+/* interface movementObject {
   type: string;
   date: string;
   product: string;
   price: string;
   seller: string;
-}
+} */
 
-interface userObject {
+/* interface userObject {
   name: string;
-}
+} */
 
-interface productObject {
+/* interface productObject {
   product: string;
   producer: string;
-}
+} */
 
 interface Respuesta {
   respuesta: string;
@@ -42,8 +38,10 @@ interface Pregunta {
 export const NewDashboard = () => {
   const { user, signOut } = useAuth();
   const { categorias, CategoriasLoader } = useCategoria();
+  const { NewQuestionsArray } = usePergunta();
+  const { NewAnswersArray, TxtAnswer } = useResposta();
   const [txtFile, setTxtFile] = useState<any[]>([]);
-  const [csvFile, setCsvFile] = useState<any[]>([]);
+  const [unformatedFile, setUnformatedFile] = useState<any[]>([]);
   const [bigFile, setBigFile] = useState<any[]>([]);
 
   useEffect(() => {
@@ -61,17 +59,39 @@ export const NewDashboard = () => {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
-          setBigFile(results.data);
+          setUnformatedFile(results.data);
         },
       });
+      console.log(unformatedFile);
+      const formatedFile =
+        unformatedFile &&
+        unformatedFile.map((item) => ({
+          pergunta: item.Pergunta,
+          repostas: [
+            { resposta: item.Alternativa1, estaCerto: item.Verdad1 },
+            { resposta: item.Alternativa2, estaCerto: item.Verdad2 },
+            { resposta: item.Alternativa3, estaCerto: item.Verdad3 },
+            { resposta: item.Alternativa4, estaCerto: item.Verdad4 },
+            {
+              resposta: item.Alternativa5 && item.Alternativa5,
+              estaCerto: item.Verdad5 && item.Verdad5,
+            },
+          ],
+          categotria: item.Categoria,
+          nivel: item.Nivel,
+          disciplina: item.Disciplina,
+          assunto: item.Assunto,
+        }));
+
+      formatedFile && setBigFile(formatedFile);
     } else if (file.type === "text/plain") {
-      let cosa: string = "";
+      let archivo: string = "";
       const fileReader = new FileReader();
       fileReader.readAsText(file);
       fileReader.onload = () => {
-        cosa = JSON.stringify(fileReader.result);
+        archivo = JSON.stringify(fileReader.result);
         const preguntasTxtArray =
-          cosa && cosa.replace(/["]+/g, "").split("\\n\\n\\n");
+          archivo && archivo.replace(/["]+/g, "").split("\\n\\n\\n");
 
         const clasificacion =
           preguntasTxtArray && preguntasTxtArray.slice(0, 1)[0].split("\\n");
@@ -100,7 +120,26 @@ export const NewDashboard = () => {
             Assunto: clasificacion && clasificacion[3],
           }));
 
-        preguntas && setBigFile(preguntas);
+        const formatedFile =
+          preguntas &&
+          preguntas.map((item) => ({
+            pergunta: item.Pergunta,
+            repostas: [
+              { resposta: item.Alternativa1, estaCerto: item.Verdad1 },
+              { resposta: item.Alternativa2, estaCerto: item.Verdad2 },
+              { resposta: item.Alternativa3, estaCerto: item.Verdad3 },
+              { resposta: item.Alternativa4, estaCerto: item.Verdad4 },
+              {
+                resposta: item.Alternativa5 && item.Alternativa5,
+                estaCerto: item.Verdad5 && item.Verdad5,
+              },
+            ],
+            categotria: item.Categoria,
+            nivel: item.Nivel,
+            disciplina: item.Disciplina,
+            assunto: item.Assunto,
+          }));
+        formatedFile && setBigFile(formatedFile);
       };
 
       fileReader.onerror = () => {
@@ -111,20 +150,24 @@ export const NewDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(bigFile);
-  }, [bigFile]);
+  //console.log(bigFile);
+
+  //NewQuestionsArray(bigFile);
 
   return (
     <div className="dashboard">
       <div className="dashboard-sheath">
-        <div className="file-form">
-          <label htmlFor="file">Escolher Arquivo</label>
-          <BGInput type="file" name="file" id="file" onChange={fileHandler} />
-        </div>
-        <div className="file-form sender">
-          <BGbutton variant="yes">ENVIAR ARQUIVO</BGbutton>
-        </div>
+        <BGformulario onSubmit={() => NewQuestionsArray(bigFile)}>
+          <div className="file-form">
+            <label htmlFor="file">Escolher Arquivo</label>
+            <BGInput type="file" name="file" id="file" onChange={fileHandler} />
+          </div>
+          <div className="file-form sender">
+            <BGbutton type="submit" variant="yes">
+              ENVIAR ARQUIVO
+            </BGbutton>
+          </div>
+        </BGformulario>
       </div>
 
       <div className="footer_action">

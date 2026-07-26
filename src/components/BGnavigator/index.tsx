@@ -41,11 +41,22 @@ export const BGNavigator = () => {
               <span>Dashboard</span>
             </Link>
           </div>
-          {/* <div className="navigator">
-            <Link to={`/test/purchases`} onClick={() => {}}>
-              <span>Compras</span>
+          <div className="navigator">
+            <Link
+              to={`/${institution.institutionId}/perguntanova`}
+              //onClick={() => {}}
+            >
+              <span>Pergunta Nova</span>
             </Link>
-          </div> */}
+          </div>
+          <div className="navigator">
+            <Link
+              to={`/${institution.institutionId}/perguntas`}
+              //onClick={() => {}}
+            >
+              <span>Perguntas</span>
+            </Link>
+          </div>
           <div className="navigator">
             <Link to="/" onClick={() => signOut()}>
               <span>Salir</span>

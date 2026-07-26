@@ -1,7 +1,7 @@
 import "./instituto.style.css";
 import { InstitutionForm } from "./InstitutionForm";
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export const Institution = () => {
   return (

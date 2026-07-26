@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 //import { useInstitution } from "../../context/InstitutionContext";
 import "./dashboard.style.css";
 import { useAuth } from "../../context/UserContext";

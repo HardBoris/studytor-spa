@@ -8,9 +8,15 @@ import {
 import { localApi as api } from "../services/api";
 import { useAuth } from "./UserContext";
 import { useParams } from "react-router-dom";
+import { useResposta } from "./RespostaContext";
 
 interface PerguntaProviderProps {
   children: ReactNode;
+}
+
+interface Respuesta {
+  resposta: string;
+  estaCerto: boolean;
 }
 
 export interface Pergunta {
@@ -22,6 +28,7 @@ export interface Pergunta {
   categoria?: string;
   institution?: string;
   user?: string;
+  repostas?: Respuesta[];
 }
 
 /* export interface PerguntaNovaInfo {
@@ -50,6 +57,7 @@ const usePergunta = () => useContext(PerguntaContext);
 const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
   const [perguntas, setPerguntas] = useState<Pergunta[]>([]);
   const [questions, setQuestions] = useState<Pergunta[]>([]);
+  const { NewAnswersArray } = useResposta();
   const { institution, token, user } = useAuth();
   const [estaPergunta, setEstaPergunta] = useState("");
 
@@ -70,8 +78,8 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
     PerguntasLoader();
   }, []);
 
-  const NewQuestion = (data: Pergunta) => {
-    api
+  const NewQuestion = async (data: Pergunta) => {
+    await api
       .post(
         "/:institutionId/perguntas/register",
         {
@@ -84,13 +92,16 @@ const PerguntaProvider = ({ children }: PerguntaProviderProps) => {
       .then((response) => {
         console.log(response.data.perguntaId);
         setEstaPergunta(response.data.perguntaId);
+        NewAnswersArray(questions[0].repostas!);
       })
       .catch((error) => console.log(error));
   };
 
   const NewQuestionsArray = (data: Pergunta[]) => {
-    questions && Promise.all(questions.map((item) => NewQuestion(item)));
+    data && Promise.all(data.map((item) => NewQuestion(item)));
   };
+
+  console.log(token);
 
   return (
     <PerguntaContext.Provider

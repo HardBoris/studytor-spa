@@ -4,10 +4,10 @@ import { BGformulario } from "../../components/BGformulario";
 import { BGInput } from "../../components/BGinput";
 import { BGSelect } from "../../components/BGSelect";
 import "./perguntaNova.css";
-import { PerguntaNovaInfo, usePergunta } from "../../context/PerguntaContext";
+import { Pergunta, usePergunta } from "../../context/PerguntaContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BGModal from "../../components/BGmodal";
 import { NovaDisciplina } from "./NovaDisciplina";
 import { useDisciplina } from "../../context/DisciplinaContext";
@@ -20,10 +20,10 @@ import { useAuth } from "../../context/UserContext";
 import { Respostas } from "../Respostas";
 
 const PerguntaNovaSchema = yup.object().shape({
-  disciplina: yup.string().required(),
+  /*disciplina: yup.string().required(),
   nivel: yup.string().required(),
   assunto: yup.string().required(),
-  categoria: yup.string().required(),
+  categoria: yup.string().required(),*/
   pergunta: yup.string().required(),
 });
 
@@ -32,7 +32,7 @@ export const PerguntaNova = () => {
   const { disciplinas, DisciplinasLoader } = useDisciplina();
   const { assuntos, AssuntosLoader } = useAssunto();
   const { categorias, CategoriasLoader } = useCategoria();
-  const { institution } = useAuth();
+  const { institution, token } = useAuth();
   const nivel = ["Fundamental", "Médio", "Técnico", "Superior"];
 
   const [newDisciplineOpen, setNewDisciplineOpen] = useState(false);
@@ -44,6 +44,8 @@ export const PerguntaNova = () => {
   //const [selectedNivel, setSelectedNivel] = useState("");
   const [selectedAsunto, setSelectedAsunto] = useState("");
   const [selectedCategoria, setSelectedCategoria] = useState("");
+
+  console.log(token);
 
   useEffect(() => {
     DisciplinasLoader();
@@ -62,11 +64,11 @@ export const PerguntaNova = () => {
     register,
     reset,
     handleSubmit,
-  } = useForm<PerguntaNovaInfo>({ resolver: yupResolver(PerguntaNovaSchema) });
+  } = useForm<Pergunta>({ resolver: yupResolver(PerguntaNovaSchema) });
 
   //console.log(token);
 
-  const sender = (info: PerguntaNovaInfo) => {
+  const sender = (info: Pergunta) => {
     //console.log(info);
     //answersModal();
 
@@ -99,6 +101,8 @@ export const PerguntaNova = () => {
   const answersModal = () => {
     setAnswersOpen(!answersOpen);
   };
+
+  console.log(token);
 
   return (
     <>

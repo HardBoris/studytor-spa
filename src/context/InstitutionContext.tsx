@@ -116,6 +116,8 @@ const InstitutionProvider = ({ children }: InstitutionProviderProps) => {
     myInstitution();
   }, []);
 
+  console.log(token);
+
   return (
     <InstitutionContext.Provider
       value={{

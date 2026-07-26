@@ -20,6 +20,11 @@ export interface Resposta {
   perguntaId?: string;
 }
 
+export interface TxtResposta {
+  Alternativa: string;
+  Verdad: boolean;
+}
+
 export interface Respostas {
   respostas: Resposta[];
 }
@@ -30,6 +35,7 @@ interface RespostaContextData {
   NewAnswer: (info: Resposta) => void;
   setAnswers: (data: Resposta[]) => void;
   NewAnswersArray: (data: Resposta[]) => void;
+  TxtAnswer: (data: any) => void;
 }
 
 export const RespostaContext = createContext<RespostaContextData>(
@@ -74,13 +80,35 @@ const RespostaProvider = ({ children }: RespostaProviderProps) => {
       .catch((error) => console.log(error));
   };
 
+  const TxtAnswer = (txt: TxtResposta) => {
+    const { Alternativa, Verdad } = txt;
+    api
+      .post(
+        "/:institutionId/respostas/register",
+        {
+          resposta: txt.Alternativa,
+          estaCerto: txt.Verdad,
+          institution: institution.institutionId,
+          pergunta: estaPergunta,
+          user: user.userId,
+        },
+        { headers: { authorization: `Bearer ${token}` } },
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
   const NewAnswersArray = (data: Resposta[]) => {
-    answers && Promise.all(answers.map((item) => NewAnswer(item)));
+    data && Promise.all(data.map((item) => NewAnswer(item)));
   };
 
   useEffect(() => {
     RespostasList();
   }, []);
+
+  console.log(token);
 
   return (
     <RespostaContext.Provider
@@ -90,6 +118,7 @@ const RespostaProvider = ({ children }: RespostaProviderProps) => {
         NewAnswer,
         setAnswers,
         NewAnswersArray,
+        TxtAnswer,
       }}
     >
       {children}

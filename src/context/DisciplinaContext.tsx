@@ -3,6 +3,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import { localApi as api } from "../services/api";
@@ -33,11 +34,15 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
   const { token } = useAuth();
   const [disciplinas, setDisciplinas] = useState([]);
 
+  //const prueba = useMemo(() => DisciplinasLoader(), [disciplinas]);
+
   const DisciplinasLoader = async () => {
     await api
-      .get("/disciplinas", {
+      .get(
+        "/disciplinas" /*, {
         headers: { authorization: `Bearer ${token}` },
-      })
+      }*/,
+      )
       .then((response) => {
         setDisciplinas(response.data);
       })
@@ -60,6 +65,8 @@ const DisciplinaProvider = ({ children }: DisciplinaProviderProps) => {
       })
       .catch((error) => console.log(error));
   };
+
+  console.log(token);
 
   return (
     <DisciplinaContext.Provider

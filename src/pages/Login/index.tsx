@@ -1,7 +1,7 @@
 import "./login.style.css";
 import { LoginForm } from "./LoginForm";
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import login_picture from "../../assets/pictures/login_image.png";
 
 export const Login = () => {

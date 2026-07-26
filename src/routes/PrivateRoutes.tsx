@@ -9,6 +9,7 @@ import { Dashboard } from "../pages/Dashboard";
 import { PerguntaNova } from "../pages/PerguntaNova";
 import { Respostas } from "../pages/Respostas";
 import { NewDashboard } from "../pages/Dashboard/dashboard";
+import { Questions } from "../pages/Questions";
 
 export const PrivateRoutes = () => {
   const { institution } = useAuth();
@@ -24,6 +25,10 @@ export const PrivateRoutes = () => {
         <Route
           path={"/" + institution.institutionId + "/perguntanova"}
           element={<PerguntaNova />}
+        />
+        <Route
+          path={"/" + institution.institutionId + "/perguntas"}
+          element={<Questions />}
         />
         <Route
           path="*"

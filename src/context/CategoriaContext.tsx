@@ -35,9 +35,11 @@ const CategoriaProvider = ({ children }: CategoriaProviderProps) => {
 
   const CategoriasLoader = async () => {
     await api
-      .get("/categorias", {
+      .get(
+        "/categorias" /*, {
         headers: { authorization: `Bearer ${token}` },
-      })
+      }*/,
+      )
       .then((response) => {
         setCategorias(response.data);
       })
@@ -60,6 +62,8 @@ const CategoriaProvider = ({ children }: CategoriaProviderProps) => {
       })
       .catch((error) => console.log(error));
   };
+
+  console.log(token);
 
   return (
     <CategoriaContext.Provider

@@ -65,17 +65,17 @@ const UserProvider = ({ children }: UserProviderProps) => {
   );
 
   const [data, setData] = useState<AuthState>(() => {
-    /* const token = localStorage.getItem("@Studytor:token");
+    const token = localStorage.getItem("@Studytor:token");
     const user = localStorage.getItem("@Studytor:user");
-    const institution = localStorage.getItem("@Studytor:institution"); */
+    const institution = localStorage.getItem("@Studytor:institution");
 
     if (token && user && institution) {
       return {
         token,
-        /* user: JSON.parse(user),
-        institution: JSON.parse(institution), */
-        user,
-        institution,
+        user: JSON.parse(user),
+        institution: JSON.parse(institution),
+        /* user,
+        institution, */
       };
     }
 
@@ -104,13 +104,13 @@ const UserProvider = ({ children }: UserProviderProps) => {
       .then((response) => {
         //console.log(response);
         const { user, token, institution } = response.data;
-        /* localStorage.setItem("@Studytor:token", token);
+        localStorage.setItem("@Studytor:token", token);
         localStorage.setItem("@Studytor:user", JSON.stringify(user));
         localStorage.setItem(
           "@Studytor:institution",
           JSON.stringify(institution),
-        ) */ //console.log(institution);
-        //setData({ user, token, institution });
+        ); //console.log(institution);
+        setData({ user, token, institution });
         setUser(user);
         setToken(token);
         setInstitution(institution);
@@ -132,6 +132,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
         }); */
       });
   };
+
+  //console.log(token);
 
   const signUp = async ({ name, password }: SignInCredentials) => {
     // const aviso = toast.loading("Por Favor espere...");
@@ -170,6 +172,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     setData({} as AuthState);
   };
+
+  console.log(token);
 
   return (
     <UserContext.Provider

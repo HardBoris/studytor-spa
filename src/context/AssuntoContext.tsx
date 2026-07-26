@@ -35,7 +35,7 @@ const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
 
   const AssuntosLoader = async () => {
     await api
-      .get("/assuntos", { headers: { authorization: `Bearer ${token}` } })
+      .get("/assuntos" /*, { headers: { authorization: `Bearer ${token}` } }*/)
       .then((response) => {
         setAssuntos(response.data);
       })
@@ -58,6 +58,8 @@ const AssuntoProvider = ({ children }: AssuntoProviderProps) => {
       })
       .catch((error) => console.log(error));
   };
+
+  console.log(token);
 
   return (
     <AssuntoContext.Provider

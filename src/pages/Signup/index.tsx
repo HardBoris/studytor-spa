@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import "./signup.style.css";
 import { SignupForm } from "./SignupForm";
 import BGModal from "../../components/BGmodal";
